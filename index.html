@@ -1,0 +1,1184 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Paper 1 Pack</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;800&family=Figtree:wght@400;500;700&family=IBM+Plex+Mono:wght@500;600&display=swap">
+<style>
+/* Layout: one long study sheet. Sticky topic chips on top, a coloured band per topic,
+   then one card per question type (how it is worded, method, worked example). */
+:root{
+  --bg:#f3f4fa; --surface:#ffffff; --fg:#161a33; --muted:#555b7a; --line:#dcdff0;
+  --on-c:#ffffff; --warn:#b42318; --warn-bg:#fdecea; --ok:#12733a;
+  --alg:#5b3ef0; --pat:#0b8585; --fin:#17803f; --fun:#d4510a; --cal:#c2255c; --pro:#1971c2;
+  --f-display:'Bricolage Grotesque','Trebuchet MS',system-ui,sans-serif;
+  --f-body:'Figtree',system-ui,-apple-system,'Segoe UI',sans-serif;
+  --f-mono:'IBM Plex Mono',ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#0e1020; --surface:#171a30; --fg:#eceefb; --muted:#a2a8c7; --line:#2b3052;
+  --on-c:#10122a; --warn:#ff9b8f; --warn-bg:#3a1b1d; --ok:#6fdc9a;
+  --alg:#a99bff; --pat:#4fd1c5; --fin:#5fd68a; --fun:#ff9a5c; --cal:#ff8fb4; --pro:#74b9ff; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0e1020; --surface:#171a30; --fg:#eceefb; --muted:#a2a8c7; --line:#2b3052;
+  --on-c:#10122a; --warn:#ff9b8f; --warn-bg:#3a1b1d; --ok:#6fdc9a;
+  --alg:#a99bff; --pat:#4fd1c5; --fin:#5fd68a; --fun:#ff9a5c; --cal:#ff8fb4; --pro:#74b9ff; color-scheme:dark}
+
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--fg);font-family:var(--f-body);font-size:16px;line-height:1.55;margin:0;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:0 64px}
+.wrap{max-width:860px;margin:0 auto;min-width:0}
+h1,h2,h3{font-family:var(--f-display);text-wrap:balance;line-height:1.15;margin:0}
+p{margin:0 0 .6em}
+sup,sub{line-height:0}
+.alg{--c:var(--alg)} .pat{--c:var(--pat)} .fin{--c:var(--fin)} .fun{--c:var(--fun)} .cal{--c:var(--cal)} .pro{--c:var(--pro)}
+.tint{background:color-mix(in srgb,var(--c) 11%,var(--surface))}
+
+/* header */
+.hero{padding-block:28px 8px}
+.hero .kicker{font-family:var(--f-mono);font-size:.78rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.hero h1{font-size:clamp(2rem,7vw,3.2rem);font-weight:800;margin:6px 0 10px}
+.hero p{max-width:60ch;color:var(--muted)}
+.weights{display:flex;height:44px;border-radius:10px;overflow:hidden;margin:18px 0 8px;gap:2px}
+.weights button{all:unset;cursor:pointer;display:flex;align-items:center;justify-content:center;min-width:0;
+  background:var(--c);color:var(--on-c);font-family:var(--f-mono);font-weight:600;font-size:.85rem;text-align:center}
+.weights button:focus-visible{outline:3px solid var(--fg);outline-offset:-3px}
+.wlegend{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:.85rem;color:var(--muted);margin-bottom:6px}
+.wlegend i{display:inline-block;width:10px;height:10px;border-radius:3px;background:var(--c);margin-right:5px}
+
+/* nav */
+.nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:var(--bg);padding-block:8px;border-bottom:1px solid var(--line)}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:30;background:var(--bg)}
+.nav .row{display:flex;gap:8px;overflow-x:auto;padding-bottom:2px;scrollbar-width:none}
+.nav button{all:unset;cursor:pointer;flex:none;padding:7px 13px;border-radius:99px;border:2px solid var(--c,var(--line));color:var(--fg);font-weight:700;font-size:.85rem;white-space:nowrap}
+.nav button.on{background:var(--c,var(--fg));color:var(--on-c)}
+.nav button:focus-visible{outline:3px solid var(--fg);outline-offset:2px}
+.prog{font-family:var(--f-mono);font-size:.75rem;color:var(--muted);margin-top:6px;display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap}
+.bar{height:5px;background:var(--line);border-radius:9px;overflow:hidden;margin-top:4px}
+.bar i{display:block;height:100%;width:0;background:var(--ok);transition:width .3s}
+
+/* topic band */
+section.topic{margin-top:44px;scroll-margin-top:96px}
+.band{background:var(--c);color:var(--on-c);border-radius:16px;padding:20px 22px;display:flex;gap:16px;align-items:flex-end;justify-content:space-between;flex-wrap:wrap}
+.band h2{font-size:clamp(1.5rem,5vw,2.1rem);font-weight:800}
+.band .sub{opacity:.92;font-size:.95rem;margin-top:4px}
+.band .marks{font-family:var(--f-mono);font-weight:600;font-size:1rem;border:2px solid currentColor;border-radius:99px;padding:5px 14px;white-space:nowrap}
+
+.box{border-radius:12px;padding:14px 16px;margin-top:14px}
+.must{border:2px solid var(--c)} .must h3{font-size:1rem;color:var(--c);margin-bottom:8px;text-transform:uppercase;letter-spacing:.06em}
+.must ul{margin:0;padding-left:1.1em} .must li{margin:3px 0}
+.trap{background:var(--warn-bg);color:var(--fg);border:2px solid var(--warn)} .trap h3{font-size:1rem;color:var(--warn);margin-bottom:6px;text-transform:uppercase;letter-spacing:.06em}
+.trap ul{margin:0;padding-left:1.1em} .trap li{margin:3px 0}
+.f{font-family:var(--f-mono);font-weight:500;font-size:.92rem;background:color-mix(in srgb,var(--c) 14%,var(--surface));padding:1px 7px;border-radius:6px;white-space:nowrap}
+.fb{display:block;font-family:var(--f-mono);font-weight:500;font-size:.95rem;background:color-mix(in srgb,var(--c) 14%,var(--surface));padding:8px 12px;border-radius:8px;margin:6px 0;overflow-x:auto;white-space:nowrap}
+.fr{display:inline-flex;flex-direction:column;vertical-align:middle;text-align:center;line-height:1.2;margin:0 .15em}
+.fr>span:first-child{border-bottom:1.5px solid currentColor;padding:0 .25em}
+
+/* type cards */
+.types{display:grid;gap:14px;margin-top:16px}
+.type{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:16px 18px;min-width:0}
+.type header{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-bottom:8px}
+.tag{font-family:var(--f-mono);font-size:.72rem;font-weight:600;letter-spacing:.06em;background:var(--c);color:var(--on-c);padding:3px 9px;border-radius:6px}
+.type h3{font-size:1.12rem;flex:1 1 200px;min-width:0}
+.got{font-size:.82rem;color:var(--muted);display:flex;align-items:center;gap:6px;cursor:pointer}
+.got input{width:18px;height:18px;accent-color:var(--ok)}
+.say{font-style:italic;color:var(--muted);border-left:3px solid var(--c);padding-left:10px;margin:6px 0 8px}
+.how{margin:6px 0 8px;padding-left:1.2em} .how li{margin:2px 0}
+details.ex{margin-top:8px;border-radius:10px;border:1px solid var(--line)}
+details.ex summary{cursor:pointer;font-weight:700;padding:9px 12px;color:var(--c);list-style:none}
+details.ex summary::-webkit-details-marker{display:none}
+details.ex summary::before{content:"\25B8  "} details.ex[open] summary::before{content:"\25BE  "}
+details.ex summary:focus-visible{outline:3px solid var(--c);outline-offset:2px;border-radius:8px}
+.sol{padding:2px 14px 12px;overflow-x:auto}
+.sol p{margin:.3em 0} .sol .q{font-weight:700}
+.sol .ln{font-family:var(--f-mono);font-size:.9rem;font-weight:500;white-space:nowrap;display:block;padding:1px 0}
+.ans{display:inline-block;margin-top:4px;font-weight:700;color:var(--ok)}
+.tip{background:color-mix(in srgb,var(--c) 12%,var(--surface));border-radius:8px;padding:8px 12px;margin-top:8px;font-size:.93rem}
+.tbl{overflow-x:auto;margin:8px 0}
+table{border-collapse:collapse;font-size:.9rem;min-width:420px;width:100%}
+th,td{border:1px solid var(--line);padding:6px 9px;text-align:left;vertical-align:top}
+th{background:color-mix(in srgb,var(--c) 16%,var(--surface))}
+
+.plan{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:16px 18px;margin-top:14px}
+.plan ul,.plan ol{margin:6px 0 0;padding-left:1.2em} .plan li{margin:3px 0}
+.two{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px}
+.two>*{min-width:0}
+footer{margin-top:40px;color:var(--muted);font-size:.85rem}
+footer a{color:var(--fg)}
+.ctl{all:unset;cursor:pointer;font-weight:700;font-size:.85rem;border:2px solid var(--fg);border-radius:99px;padding:5px 12px;margin-top:10px;display:inline-block}
+.ctl:focus-visible{outline:3px solid var(--fg);outline-offset:2px}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+@media print{.nav,.ctl{display:none} body{background:#fff;color:#000}}
+</style>
+
+<div class="wrap">
+
+<div class="hero">
+  <div class="kicker">NSC Mathematics · Paper 1 · CAPS · Grade 12</div>
+  <h1>Paper 1 Pack</h1>
+  <p>Every topic, and every kind of question the NSC papers ask on it. Each question type has the wording they use, a method you can follow under pressure, and a worked example. Tick “Got it” when you can do a type without looking.</p>
+  <div class="weights" role="group" aria-label="Marks per topic. Tap to jump.">
+    <button class="alg" style="flex:25" data-go="alg">25</button>
+    <button class="pat" style="flex:25" data-go="pat">25</button>
+    <button class="fin" style="flex:15" data-go="fin">15</button>
+    <button class="fun" style="flex:35" data-go="fun">35</button>
+    <button class="cal" style="flex:35" data-go="cal">35</button>
+    <button class="pro" style="flex:15" data-go="pro">15</button>
+  </div>
+  <div class="wlegend">
+    <span class="alg"><i></i>Algebra</span><span class="pat"><i></i>Patterns</span><span class="fin"><i></i>Finance</span>
+    <span class="fun"><i></i>Functions</span><span class="cal"><i></i>Calculus</span><span class="pro"><i></i>Probability</span>
+  </div>
+  <button class="ctl" id="toggleAll" type="button">Collapse all worked examples</button>
+</div>
+
+<nav class="nav" aria-label="Topics">
+  <div class="row">
+    <button data-go="plan">Game plan</button>
+    <button class="alg" data-go="alg">Algebra</button>
+    <button class="pat" data-go="pat">Patterns</button>
+    <button class="fin" data-go="fin">Finance</button>
+    <button class="fun" data-go="fun">Functions</button>
+    <button class="cal" data-go="cal">Calculus</button>
+    <button class="pro" data-go="pro">Probability</button>
+    <button data-go="last">Exam day</button>
+  </div>
+  <div class="prog"><span id="progText">0 of 0 question types ticked</span></div>
+  <div class="bar"><i id="progBar"></i></div>
+</nav>
+
+<!-- ============ GAME PLAN ============ -->
+<section class="topic" id="plan" style="--c:var(--fg)">
+  <div class="plan">
+    <h2 style="font-size:1.5rem">The paper in 60 seconds</h2>
+    <ul>
+      <li><b>150 marks in 3 hours.</b> That is about 1.2 minutes per mark. Aim to finish with 10 minutes to check.</li>
+      <li><b>Mark split (DBE exam guidelines):</b> Functions 35, Calculus 35, Algebra 25, Patterns 25, Finance 15, Probability 15.</li>
+      <li><b>Difficulty split:</b> about 30 marks Knowledge, 52 Routine, 45 Complex, 22 Problem Solving. So roughly 82 marks (55%) are knowledge and routine procedures. Bank those first.</li>
+      <li><b>Cheapest marks to revise tonight:</b> Finance and Probability (30 marks, very predictable) and the first parts of every question.</li>
+      <li><b>Not examined (per the guidelines):</b> solving quadratics by completing the square, conditional probability, combinations (nCr), circular arrangements, solving for <em>i</em> in annuity formulae, pyramid schemes, recursive patterns.</li>
+    </ul>
+  </div>
+  <div class="two">
+    <div class="plan">
+      <h3>Method marks, every question</h3>
+      <ul>
+        <li>Write the formula, then substitute. A wrong final answer can still earn method marks.</li>
+        <li>Keep full calculator values until the last line. Round to 2 decimals only at the end.</li>
+        <li>“Show that…” gives you the answer. Use it in the next part even if you could not prove it.</li>
+        <li>Do not cross out work unless you have replaced it.</li>
+        <li>Label sketches: intercepts, turning points, asymptotes (dashed).</li>
+        <li>Answer in words when the question is a context problem, with units.</li>
+      </ul>
+    </div>
+    <div class="plan">
+      <h3>Tonight’s study order (about 5 hours)</h3>
+      <ol>
+        <li>Finance: 40 min</li>
+        <li>Algebra: 45 min</li>
+        <li>Patterns: 45 min</li>
+        <li>Break and supper</li>
+        <li>Functions: 60 min</li>
+        <li>Calculus: 60 min</li>
+        <li>Probability: 30 min</li>
+        <li>Stop. Sleep. A rested brain beats an extra hour.</li>
+      </ol>
+    </div>
+  </div>
+  <p class="tip tint" style="margin-top:14px;border-radius:12px;--c:var(--fg)">The paper comes with an information sheet. It normally lists the quadratic formula, the arithmetic and geometric sequence and series formulae, the finance formulae, the first-principles definition and the probability addition rule. Check yours when you open the paper. The sheet does not tell you <em>when</em> to use a formula, and it does not give derivative rules, exponent or log laws.</p>
+</section>
+
+<!-- ============ ALGEBRA ============ -->
+<section class="topic alg" id="alg">
+  <div class="band"><div><h2>Algebra, Equations and Inequalities</h2><div class="sub">Usually Question 1</div></div><div class="marks">25 marks</div></div>
+
+  <div class="box must tint">
+    <h3>Must know</h3>
+    <ul>
+      <li>Quadratic formula: <span class="f">x = (−b ± √(b² − 4ac)) / 2a</span></li>
+      <li>Exponents: <span class="f">aᵐ·aⁿ = aᵐ⁺ⁿ</span> <span class="f">aᵐ ÷ aⁿ = aᵐ⁻ⁿ</span> <span class="f">(aᵐ)ⁿ = aᵐⁿ</span> <span class="f">a⁻ⁿ = 1/aⁿ</span> <span class="f">a^(m/n) = ⁿ√(aᵐ)</span> <span class="f">a⁰ = 1</span></li>
+      <li>Logarithm definition: <span class="f">log<sub>a</sub>b = c ⇔ aᶜ = b</span> (a &gt; 0, a ≠ 1, b &gt; 0). Convert between logarithmic and exponential form. Logarithmic-law manipulation is not examined in NSC Paper 1.</li>
+      <li>Discriminant <span class="f">Δ = b² − 4ac</span>. Δ &gt; 0: two real unequal roots (rational if Δ is a perfect square). Δ = 0: two equal real roots. Δ &lt; 0: no real roots.</li>
+      <li>Calculator: solve <span class="f">aˣ = b</span> with <span class="f">x = log b / log a</span>.</li>
+    </ul>
+  </div>
+
+  <div class="types">
+
+    <article class="type" id="alg-1">
+      <header><span class="tag">TYPE 1</span><h3>Solve a quadratic equation</h3><label class="got"><input type="checkbox" data-k="alg-1"> Got it</label></header>
+      <p class="say">“Solve for x: 2x² − 3x = 4” · “Solve for x, correct to TWO decimal places.”</p>
+      <ol class="how"><li>Move everything to one side: <span class="f">ax² + bx + c = 0</span>.</li><li>Factorise if it factorises quickly. If the question says “correct to two decimals”, use the formula.</li><li>Write the formula with the substitution, then both answers.</li></ol>
+      <details class="ex" open><summary>Worked example</summary><div class="sol">
+        <p class="q">Solve 2x² − 3x − 4 = 0, correct to 2 decimals.</p>
+        <span class="ln">x = (3 ± √(9 + 32)) / 4 = (3 ± √41) / 4</span>
+        <span class="ln">x = 2,35 or x = −0,85</span>
+      </div></details>
+    </article>
+
+    <article class="type" id="alg-2">
+      <header><span class="tag">TYPE 2</span><h3>Quadratic in disguise (the k-substitution)</h3><label class="got"><input type="checkbox" data-k="alg-2"> Got it</label></header>
+      <p class="say">“Solve for x: 3²ˣ − 4·3ˣ + 3 = 0” · “x⁴ − 5x² + 4 = 0” · “x − 5√x + 4 = 0”</p>
+      <ol class="how"><li>Spot the repeated block (3ˣ, x², √x). Let it equal <b>k</b>.</li><li>Solve the quadratic in k.</li><li>Go back: replace k, solve for x.</li><li>Reject impossible values (aˣ is never negative, √x is never negative).</li></ol>
+      <details class="ex" open><summary>Worked example</summary><div class="sol">
+        <p class="q">Solve 2²ˣ − 3·2ˣ − 4 = 0.</p>
+        <span class="ln">Let k = 2ˣ:  k² − 3k − 4 = 0</span>
+        <span class="ln">(k − 4)(k + 1) = 0  →  k = 4 or k = −1</span>
+        <span class="ln">2ˣ = 4  →  x = 2</span>
+        <span class="ln">2ˣ = −1  →  no solution (2ˣ &gt; 0)</span>
+        <span class="ans">x = 2</span>
+      </div></details>
+    </article>
+
+    <article class="type" id="alg-3">
+      <header><span class="tag">TYPE 3</span><h3>Equations with fractions</h3><label class="got"><input type="checkbox" data-k="alg-3"> Got it</label></header>
+      <p class="say">“Solve for x: 3/(x − 1) + 2/(x + 1) = 1”</p>
+      <ol class="how"><li>State the restrictions first (denominators ≠ 0).</li><li>Multiply every term by the common denominator.</li><li>Expand, collect, solve the quadratic.</li></ol>
+      <details class="ex" open><summary>Worked example</summary><div class="sol">
+        <p class="q">Solve 3/(x − 1) + 2/(x + 1) = 1, x ≠ ±1.</p>
+        <span class="ln">3(x + 1) + 2(x − 1) = (x − 1)(x + 1)</span>
+        <span class="ln">5x + 1 = x² − 1</span>
+        <span class="ln">x² − 5x − 2 = 0</span>
+        <span class="ln">x = (5 ± √33) / 2</span>
+        <span class="ans">x = 5,37 or x = −0,37</span>
+      </div></details>
+    </article>
+
+    <article class="type" id="alg-4">
+      <header><span class="tag">TYPE 4</span><h3>Equations with surds (square, then CHECK)</h3><label class="got"><input type="checkbox" data-k="alg-4"> Got it</label></header>
+      <p class="say">“Solve for x: x − 1 = √(x + 5)”</p>
+      <ol class="how"><li>Isolate the root on one side.</li><li>Square both sides (square the whole side, not each term).</li><li>Solve the quadratic.</li><li><b>Substitute both answers back.</b> Squaring creates fake solutions. This check is worth a mark.</li></ol>
+      <details class="ex" open><summary>Worked example</summary><div class="sol">
+        <p class="q">Solve x − 1 = √(x + 5).</p>
+        <span class="ln">(x − 1)² = x + 5</span>
+        <span class="ln">x² − 3x − 4 = 0  →  (x − 4)(x + 1) = 0</span>
+        <span class="ln">x = 4:  LHS = 3, RHS = √9 = 3  ✓</span>
+        <span class="ln">x = −1: LHS = −2, RHS = √4 = 2  ✗</span>
+        <span class="ans">x = 4 only</span>
+      </div></details>
+    </article>
+
+    <article class="type" id="alg-5">
+      <header><span class="tag">TYPE 5</span><h3>Exponential equations</h3><label class="got"><input type="checkbox" data-k="alg-5"> Got it</label></header>
+      <p class="say">“Solve for x: 2ˣ⁺³ − 2ˣ = 56” · “Solve for x: 5ˣ = 20 (2 decimals)”</p>
+      <ol class="how"><li><b>Same base possible?</b> Make bases equal, then equate exponents.</li><li>Sum or difference of powers: factor out the smallest power (2ˣ⁺³ = 2ˣ·2³).</li><li>Cannot make bases equal? Use logs: <span class="f">x = log b / log a</span>.</li></ol>
+      <details class="ex" open><summary>Worked example</summary><div class="sol">
+        <p class="q">Solve 2ˣ⁺³ − 2ˣ = 56.</p>
+        <span class="ln">2ˣ(2³ − 1) = 56  →  7·2ˣ = 56  →  2ˣ = 8</span>
+        <span class="ans">x = 3</span>
+        <p class="q" style="margin-top:8px">Solve 5ˣ = 20.</p>
+        <span class="ln">x = log 20 / log 5 = 1,86</span>
+      </div></details>
+    </article>
+
+    <article class="type" id="alg-6">
+      <header><span class="tag">TYPE 6</span><h3>Logarithm equations and log form</h3><label class="got"><input type="checkbox" data-k="alg-6"> Got it</label></header>
+      <p class="say">“Solve: log₃(x − 1) = 2” · “Write x in terms of y: y = log₅x” · “Solve: log₂(x + 3) = 4”</p>
+      <ol class="how"><li>Identify the base, the argument and the exponent. Do not combine logarithms using product or quotient laws.</li><li>Convert to exponential form: <span class="f">log<sub>a</sub>b = c ⇒ b = aᶜ</span>.</li><li>Solve, then reject any x that makes a log argument ≤ 0.</li></ol>
+      <details class="ex" open><summary>Worked example</summary><div class="sol">
+        <p class="q">Solve log₂(x + 3) = 4.</p>
+        <span class="ln">log₂(x + 3) = 4  ⇔  x + 3 = 2⁴ = 16</span>
+        <span class="ln">x + 3 = 16  →  x = 13</span>
+        <span class="ln">Check: x + 3 = 16 &gt; 0, so the logarithm is defined.</span>
+        <span class="ans">x = 13</span>
+      </div></details>
+    </article>
+
+    <article class="type" id="alg-7">
+      <header><span class="tag">TYPE 7</span><h3>Simultaneous equations (linear + quadratic)</h3><label class="got"><input type="checkbox" data-k="alg-7"> Got it</label></header>
+      <p class="say">“Solve for x and y: y = x − 1 and x² + y² = 25” · Also hides inside: “Find the points of intersection of the line and the curve.”</p>
+      <ol class="how"><li>Make one variable the subject of the <b>linear</b> equation.</li><li>Substitute into the quadratic. Brackets! (x − 1)² = x² − 2x + 1.</li><li>Solve, then find the matching y for <b>each</b> x using the linear equation.</li><li>Present answers as pairs.</li></ol>
+      <details class="ex" open><summary>Worked example</summary><div class="sol">
+        <span class="ln">x² + (x − 1)² = 25</span>
+        <span class="ln">2x² − 2x − 24 = 0  →  x² − x − 12 = 0</span>
+        <span class="ln">(x − 4)(x + 3) = 0</span>
+        <span class="ln">x = 4, y = 3   or   x = −3, y = −4</span>
+        <span class="ln">Check (4; 3): 16 + 9 = 25 ✓</span>
+      </div></details>
+    </article>
+
+    <article class="type" id="alg-8">
+      <header><span class="tag">TYPE 8</span><h3>Inequalities (quadratic and fractional)</h3><label class="got"><input type="checkbox" data-k="alg-8"> Got it</label></header>
+      <p class="say">“Solve for x: x² − 2x − 3 &lt; 0” · “Solve for x: x/(x − 3) ≤ 2”</p>
+      <ol class="how"><li>Get 0 on one side. <b>Never multiply or divide by an expression with x.</b></li><li>Fraction? Combine into a single fraction.</li><li>Find critical values (numerator = 0 and denominator = 0).</li><li>Sketch the parabola, or draw a sign table. Pick the region(s) that match &lt; or &gt;.</li><li>Denominator zero is always excluded.</li></ol>
+      <details class="ex" open><summary>Worked example</summary><div class="sol">
+        <p class="q">Solve x² − 2x − 3 &lt; 0.</p>
+        <span class="ln">(x − 3)(x + 1) &lt; 0   (parabola below the x-axis)</span>
+        <span class="ans">−1 &lt; x &lt; 3</span>
+        <p class="q" style="margin-top:8px">Solve x/(x − 3) ≤ 2.</p>
+        <span class="ln">x/(x − 3) − 2 ≤ 0  →  (6 − x)/(x − 3) ≤ 0</span>
+        <span class="ln">Critical values: x = 3 (excluded) and x = 6</span>
+        <span class="ln">x &lt; 3: neg ✓ · 3 &lt; x &lt; 6: pos ✗ · x &gt; 6: neg ✓</span>
+        <span class="ans">x &lt; 3 or x ≥ 6</span>
+      </div></details>
+    </article>
+
+    <article class="type" id="alg-9">
+      <header><span class="tag">TYPE 9</span><h3>Nature of the roots</h3><label class="got"><input type="checkbox" data-k="alg-9"> Got it</label></header>
+      <p class="say">“For which values of k will x² − 4x + k = 0 have real roots?” · “Prove that the roots of x² + kx − 1 = 0 are real for all k.” · “Determine the value of k for which the roots are equal.”</p>
+      <ol class="how"><li>Write down a, b, c (k can be one of them) and <span class="f">Δ = b² − 4ac</span>.</li><li>Real roots: Δ ≥ 0. Equal roots: Δ = 0. Non-real: Δ &lt; 0. Rational: Δ a perfect square.</li><li>“Prove for all k”: show Δ is a square plus a positive number, or always positive.</li></ol>
+      <details class="ex" open><summary>Worked example</summary><div class="sol">
+        <span class="ln">x² − 4x + k = 0:  Δ = 16 − 4k ≥ 0  →  k ≤ 4</span>
+        <span class="ln">x² + kx − 1 = 0:  Δ = k² + 4</span>
+        <span class="ln">k² ≥ 0, so Δ ≥ 4 &gt; 0 for every k: roots always real and unequal.</span>
+      </div></details>
+    </article>
+
+    <article class="type" id="alg-10">
+      <header><span class="tag">TYPE 10</span><h3>Make a letter the subject of a formula</h3><label class="got"><input type="checkbox" data-k="alg-10"> Got it</label></header>
+      <p class="say">“Make a the subject of x = (a + b)/(a − b).”</p>
+      <ol class="how"><li>Clear fractions.</li><li>Expand. Gather every term containing the required letter on one side.</li><li>Factorise out that letter and divide.</li></ol>
+      <details class="ex" open><summary>Worked example</summary><div class="sol">
+        <span class="ln">x(a − b) = a + b</span>
+        <span class="ln">xa − xb = a + b</span>
+        <span class="ln">xa − a = b + xb</span>
+        <span class="ln">a(x − 1) = b(1 + x)</span>
+        <span class="ans">a = b(x + 1) / (x − 1)</span>
+      </div></details>
+    </article>
+
+    <article class="type" id="alg-11">
+      <header><span class="tag">TYPE 11</span><h3>Simplify or prove with exponents and surds</h3><label class="got"><input type="checkbox" data-k="alg-11"> Got it</label></header>
+      <p class="say">“Simplify without a calculator: (2ⁿ⁺² − 2ⁿ) / (3·2ⁿ)” · “Show that 1/(√5 − √3) = (√5 + √3)/2”</p>
+      <ol class="how"><li>Break each power into a common base: 2ⁿ⁺² = 2ⁿ·2².</li><li>Factor out the common power and cancel.</li><li>Rationalise a denominator by multiplying top and bottom by the conjugate (√5 + √3). The product gives 5 − 3.</li></ol>
+      <details class="ex" open><summary>Worked example</summary><div class="sol">
+        <span class="ln">(2ⁿ·4 − 2ⁿ) / (3·2ⁿ) = 2ⁿ(4 − 1) / (3·2ⁿ) = 1</span>
+        <span class="ln">1/(√5 − √3) × (√5 + √3)/(√5 + √3) = (√5 + √3)/(5 − 3)</span>
+        <span class="ln">= (√5 + √3)/2  ✓</span>
+      </div></details>
+    </article>
+
+  </div>
+
+  <div class="box trap">
+    <h3>Traps in this topic</h3>
+    <ul>
+      <li>Dividing both sides by x. You lose the solution x = 0. Factorise instead.</li>
+      <li>Forgetting the ± or the second solution.</li>
+      <li>Not checking surd and log answers.</li>
+      <li>Multiplying an inequality by a negative without flipping the sign (or by an x-expression at all).</li>
+      <li>Squaring a sum term by term: (x − 1)² is x² − 2x + 1, never x² − 1.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ============ PATTERNS ============ -->
+<section class="topic pat" id="pat">
+  <div class="band"><div><h2>Number Patterns, Sequences and Series</h2><div class="sub">Usually Questions 2 and 3</div></div><div class="marks">25 marks</div></div>
+
+  <div class="box must tint">
+    <h3>Must know</h3>
+    <ul>
+      <li>Arithmetic (constant difference d): <span class="f">Tₙ = a + (n − 1)d</span> · <span class="f">Sₙ = n/2 [2a + (n − 1)d]</span> · <span class="f">Sₙ = n/2 (a + l)</span></li>
+      <li>Geometric (constant ratio r): <span class="f">Tₙ = a·rⁿ⁻¹</span> · <span class="f">Sₙ = a(rⁿ − 1)/(r − 1)</span> · <span class="f">S∞ = a/(1 − r)</span>, only when −1 &lt; r &lt; 1</li>
+      <li>Quadratic pattern <span class="f">Tₙ = an² + bn + c</span>: second difference = 2a · <span class="f">3a + b</span> = first difference between T₁ and T₂ · <span class="f">a + b + c = T₁</span></li>
+      <li>Term from the sum: <span class="f">Tₙ = Sₙ − Sₙ₋₁</span> (n ≥ 2) and <span class="f">T₁ = S₁</span></li>
+      <li>Sigma notation: number of terms = top − bottom + 1. <span class="f">Σ c = c × (number of terms)</span></li>
+      <li>Three terms in AP: <span class="f">2b = a + c</span>. Three terms in GP: <span class="f">b² = a·c</span></li>
+    </ul>
+  </div>
+
+  <div class="types">
+
+    <article class="type" id="pat-1">
+      <header><span class="tag">TYPE 1</span><h3>Arithmetic sequence: find a, d, Tₙ, or which term</h3><label class="got"><input type="checkbox" data-k="pat-1"> Got it</label></header>
+      <p class="say">“The 5th term of an arithmetic sequence is 17 and the 9th term is 33. Determine the general term.” · “Which term of the sequence is equal to 301?”</p>
+      <ol class="how"><li>Write each given term with the formula: T₅ = a + 4d, T₉ = a + 8d.</li><li>Subtract the two equations to find d. Then find a.</li><li>For “which term”, set Tₙ equal to the value and solve for n. n must be a positive whole number.</li></ol>
+      <details class="ex" open><summary>Worked example</summary><div class="sol">
+        <span class="ln">a + 4d = 17  …①   a + 8d = 33  …②</span>
+        <span class="ln">②−①: 4d = 16  →  d = 4,  a = 1</span>
+        <span class="ln">Tₙ = 1 + (n − 1)(4) = 4n − 3</span>
+        <span class="ln">4n − 3 = 301  →  n = 76</span>
+        <span class="ans">301 is the 76th term</span>
+      </div></details>
+    </article>
+
+    <article class="type" id="pat-2">
+      <header><span class="tag">TYPE 2</span><h3>Arithmetic series: Sₙ and finding n</h3><label class="got"><input type="checkbox" data-k="pat-2"> Got it</label></header>
+      <p class="say">“How many terms must be added to give a sum of 210?” · “Calculate S₂₀.”</p>
+      <ol class="how"><li>Find a and d first.</li><li>Choose the version of Sₙ that uses what you know (a and d, or a and last term).</li><li>Finding n gives a quadratic. Reject the negative root.</li></ol>
+      <details class="ex" open><summary>Worked example</summary><div class="sol">
+        <p class="q">3 + 7 + 11 + … = 210. Find n.</p>
+        <span class="ln">a = 3, d = 4:  Sₙ = n/2 [6 + 4(n − 1)] = n(2n + 1)</span>
+        <span class="ln">2n² + n − 210 = 0  →  n = (−1 ± 41)/4</span>
+        <span class="ans">n = 10 (reject −10,5)</span>
+      </div></details>
+    </article>
+
+    <article class="type" id="pat-3">
+      <header><span class="tag">TYPE 3</span><h3>Geometric sequence: find r, Tₙ, which term</h3><label class="got"><input type="checkbox" data-k="pat-3"> Got it</label></header>
+      <p class="say">“Which term of 2; 6; 18; … equals 1458?” · “The 2nd term is 6 and the 5th term is 162. Find r.”</p>
+      <ol class="how"><li>r = T₂ ÷ T₁. Given two terms: divide them (T₅/T₂ = r³).</li><li>Solve the exponent equation by writing both sides with the same base. If you cannot, use logs.</li></ol>
+      <details class="ex" open><summary>Worked example</summary><div class="sol">
+        <span class="ln">Tₙ = 2·3ⁿ⁻¹ = 1458  →  3ⁿ⁻¹ = 729 = 3⁶</span>
+        <span class="ans">n − 1 = 6, so n = 7</span>
+        <span class="ln">T₅/T₂ = 162/6 = 27 = r³  →  r = 3</span>
+      </div></details>
+    </article>
+
+    <article class="type" id="pat-4">
+      <header><span class="tag">TYPE 4</span><h3>Sum to infinity and convergence</h3><label class="got"><input type="checkbox" data-k="pat-4"> Got it</label></header>
+      <p class="say">“For which values of x will the series 5 + 5(x − 2) + 5(x − 2)² + … converge?” · “The sum to infinity is 24 and the first term is 8. Find r.” · “Calculate S∞.”</p>
+      <ol class="how"><li>Find r. Convergence means <span class="f">−1 &lt; r &lt; 1</span>.</li><li>Solve this double inequality for x. Do the same operation to all three parts.</li><li>Then S∞ = a/(1 − r).</li></ol>
+      <details class="ex" open><summary>Worked example</summary><div class="sol">
+        <span class="ln">r = x − 2:  −1 &lt; x − 2 &lt; 1  →  1 &lt; x &lt; 3</span>
+        <span class="ln">8/(1 − r) = 24  →  1 − r = 1/3</span>
+        <span class="ans">r = 2/3</span>
+      </div></details>
+    </article>
+
+    <article class="type" id="pat-5">
+      <header><span class="tag">TYPE 5</span><h3>Sigma notation</h3><label class="got"><input type="checkbox" data-k="pat-5"> Got it</label></header>
+      <p class="say">“Calculate Σ(3k − 2) from k = 1 to 20.” · “Write 2 + 6 + 18 + … + 4374 in sigma notation.” · “Determine Σ 2·3ᵏ⁻¹ from k = 1 to 8.”</p>
+      <ol class="how"><li>Write the first few terms by substituting k = 1, 2, 3.</li><li>Decide arithmetic or geometric. Find a, d (or r) and the number of terms.</li><li>Use the matching Sₙ formula.</li><li>Writing a series in sigma notation: find Tₖ and the value of k at the last term.</li></ol>
+      <details class="ex" open><summary>Worked example</summary><div class="sol">
+        <span class="ln">Σ(3k − 2), k = 1…20:  1 + 4 + 7 + …   a = 1, d = 3, n = 20</span>
+        <span class="ln">S₂₀ = 10[2 + 19(3)] = 10(59) = 590</span>
+        <span class="ln">Σ 2·3ᵏ⁻¹, k = 1…8:  a = 2, r = 3, n = 8</span>
+        <span class="ln">S₈ = 2(3⁸ − 1)/(3 − 1) = 6560</span>
+      </div></details>
+    </article>
+
+    <article class="type" id="pat-6">
+      <header><span class="tag">TYPE 6</span><h3>Quadratic number patterns</h3><label class="got"><input type="checkbox" data-k="pat-6"> Got it</label></header>
+      <p class="say">“Determine the general term of 3; 8; 15; 24; …” · “Which term equals 399?” · “Show that the first differences form an arithmetic sequence.” · “Determine the 50th term.”</p>
+      <ol class="how"><li>Write the first differences, then the second difference. Constant second difference means quadratic.</li><li><span class="f">2a</span> = second difference. <span class="f">3a + b</span> = first of the first differences. <span class="f">a + b + c</span> = T₁.</li><li>Check by substituting n = 3 or 4.</li></ol>
+      <div class="tbl tint"><table><tr><th>Term</th><td>3</td><td>8</td><td>15</td><td>24</td></tr><tr><th>1st diff</th><td colspan="2">5</td><td colspan="2">7, 9 …</td></tr><tr><th>2nd diff</th><td colspan="4">2 (constant), so a = 1</td></tr></table></div>
+      <details class="ex" open><summary>Worked example</summary><div class="sol">
+        <span class="ln">3a + b = 5  →  b = 2</span>
+        <span class="ln">a + b + c = 3  →  c = 0</span>
+        <span class="ln">Tₙ = n² + 2n      check T₄ = 16 + 8 = 24 ✓</span>
+        <span class="ln">n² + 2n = 399  →  (n + 21)(n − 19) = 0</span>
+        <span class="ans">n = 19</span>
+      </div></details>
+      <p class="tip">Variation: they give the <em>first differences</em> as a linear pattern, or give the second difference and two terms. Same three equations, different givens.</p>
+    </article>
+
+    <article class="type" id="pat-7">
+      <header><span class="tag">TYPE 7</span><h3>Tₙ from Sₙ</h3><label class="got"><input type="checkbox" data-k="pat-7"> Got it</label></header>
+      <p class="say">“The sum of the first n terms is Sₙ = 2n² + 3n. Determine T₁₀.” · “Show that the sequence is arithmetic.”</p>
+      <ol class="how"><li>Tₙ = Sₙ − Sₙ₋₁. Write Sₙ₋₁ by replacing every n with (n − 1). Brackets!</li><li>Check T₁ = S₁ matches your formula.</li></ol>
+      <details class="ex" open><summary>Worked example</summary><div class="sol">
+        <span class="ln">Sₙ₋₁ = 2(n − 1)² + 3(n − 1) = 2n² − n − 1</span>
+        <span class="ln">Tₙ = (2n² + 3n) − (2n² − n − 1) = 4n + 1</span>
+        <span class="ln">T₁ = 5 = S₁ ✓.  Tₙ − Tₙ₋₁ = 4, so arithmetic.</span>
+        <span class="ans">T₁₀ = 41</span>
+      </div></details>
+    </article>
+
+    <article class="type" id="pat-8">
+      <header><span class="tag">TYPE 8</span><h3>Recurring decimals as a geometric series</h3><label class="got"><input type="checkbox" data-k="pat-8"> Got it</label></header>
+      <p class="say">“Write 0,7̇2̇ as a fraction using a geometric series.”</p>
+      <ol class="how"><li>Split into 0,72 + 0,0072 + 0,000072 + …</li><li>a = 0,72 and r = 0,01.</li><li>S∞ = a/(1 − r), then simplify.</li></ol>
+      <details class="ex" open><summary>Worked example</summary><div class="sol">
+        <span class="ln">S∞ = 0,72 / (1 − 0,01) = 0,72 / 0,99 = 72/99</span>
+        <span class="ans">= 8/11</span>
+      </div></details>
+    </article>
+
+    <article class="type" id="pat-9">
+      <header><span class="tag">TYPE 9</span><h3>Terms that are BOTH arithmetic and geometric</h3><label class="got"><input type="checkbox" data-k="pat-9"> Got it</label></header>
+      <p class="say">“Three numbers a, b, c are in arithmetic sequence with sum 15. If 1, 4 and 19 are added to them, the new numbers form a geometric sequence. Find the numbers.”</p>
+      <ol class="how"><li>AP: b is the middle term, so a + b + c = 15 gives b = 5, and a + c = 10.</li><li>GP: new middle squared = product of the outer two.</li><li>Substitute c = 10 − a, solve the quadratic, find both sets.</li></ol>
+      <details class="ex" open><summary>Worked example</summary><div class="sol">
+        <span class="ln">New numbers: a + 1;  9;  c + 19.   (a + 1)(c + 19) = 81</span>
+        <span class="ln">with c = 10 − a:  −a² + 28a + 29 = 81  →  a² − 28a + 52 = 0</span>
+        <span class="ln">(a − 2)(a − 26) = 0</span>
+        <span class="ln">a = 2: numbers 2; 5; 8 → 3; 9; 27 (r = 3)</span>
+        <span class="ln">a = 26: numbers 26; 5; −16 → 27; 9; 3 (r = ⅓)</span>
+      </div></details>
+    </article>
+
+    <article class="type" id="pat-10">
+      <header><span class="tag">TYPE 10</span><h3>Word problems and “first term to exceed”</h3><label class="got"><input type="checkbox" data-k="pat-10"> Got it</label></header>
+      <p class="say">“She saves R200 in month 1 and R50 more each month than the previous month. How much in total after 24 months?” · “A ball is dropped from 10 m and rebounds to 60% of its previous height. How high after the 5th bounce?” · “After how many terms does the sequence first exceed 1000?”</p>
+      <ol class="how"><li>Test: constant <b>difference</b> (add the same) means arithmetic; constant <b>ratio</b> (multiply by the same) means geometric.</li><li>Write a, d or r, n. Pick Tₙ (a single amount) or Sₙ (a total).</li><li>“First exceeds”: set Tₙ &gt; value, solve with logs. Dividing by log of a number less than 1 flips the inequality.</li><li>Round n <b>up</b> to a whole number.</li></ol>
+      <details class="ex" open><summary>Worked example</summary><div class="sol">
+        <span class="ln">Savings: a = 200, d = 50, n = 24</span>
+        <span class="ln">S₂₄ = 12[400 + 23(50)] = 12(1550) = R18 600</span>
+        <span class="ln">Ball: a = 10, r = 0,6;  after 5th bounce = T₆ = 10(0,6)⁵ = 0,78 m</span>
+        <span class="ln">3·2ⁿ⁻¹ &gt; 1000 → 2ⁿ⁻¹ &gt; 333,3 → n − 1 &gt; log₂333,3 = 8,38</span>
+        <span class="ans">n &gt; 9,38, so n = 10 (T₁₀ = 1536)</span>
+      </div></details>
+    </article>
+
+  </div>
+
+  <div class="box trap">
+    <h3>Traps in this topic</h3>
+    <ul>
+      <li>Quoting S∞ when |r| ≥ 1. It does not exist.</li>
+      <li>n = 9,38 is not an answer. Terms are whole numbers.</li>
+      <li>Sigma count: k = 3 to 10 is 8 terms, not 7.</li>
+      <li>Using Sₙ when the question asks for one term, or the reverse.</li>
+      <li>Reading “after the 5th bounce” as T₅. The start height is T₁, so it is T₆.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ============ FINANCE ============ -->
+<section class="topic fin" id="fin">
+  <div class="band"><div><h2>Finance, Growth and Decay</h2><div class="sub">Usually Question 4. Very predictable.</div></div><div class="marks">15 marks</div></div>
+
+  <div class="box must tint">
+    <h3>Must know (all on the info sheet; know which one to pick)</h3>
+    <ul>
+      <li>Simple growth <span class="f">A = P(1 + in)</span> · Simple decay <span class="f">A = P(1 − in)</span></li>
+      <li>Compound growth <span class="f">A = P(1 + i)ⁿ</span> · Reducing balance <span class="f">A = P(1 − i)ⁿ</span></li>
+      <li>Future value of an annuity (savings): <span class="f">F = x[(1 + i)ⁿ − 1] / i</span></li>
+      <li>Present value of an annuity (loans): <span class="f">P = x[1 − (1 + i)⁻ⁿ] / i</span></li>
+      <li>Effective rate: <span class="f">1 + i<sub>eff</sub> = (1 + i<sup>(m)</sup>/m)ᵐ</span></li>
+      <li><b>Match i and n to the same period.</b> Monthly payments: i = rate ÷ 12 and n = months.</li>
+      <li>Payments are at the <b>end</b> of each period unless the question says the first payment is now.</li>
+      <li>You solve for P, F, x or n (never i in annuities). Solving for n uses logs.</li>
+    </ul>
+  </div>
+
+  <div class="types">
+
+    <article class="type" id="fin-1">
+      <header><span class="tag">TYPE 1</span><h3>Simple vs compound interest and growth</h3><label class="got"><input type="checkbox" data-k="fin-1"> Got it</label></header>
+      <p class="say">“R20 000 is invested for 5 years at 8% p.a. Calculate the final amount if the interest is (a) simple (b) compounded annually.” · Also: inflation, population growth, appreciation.</p>
+      <ol class="how"><li>Percent to decimal: 8% is 0,08.</li><li>Choose the formula, substitute, calculate.</li><li>Inflation or appreciation is compound growth. Use A = P(1 + i)ⁿ.</li></ol>
+      <details class="ex" open><summary>Worked example</summary><div class="sol">
+        <span class="ln">(a) A = 20 000(1 + 0,08 × 5) = R28 000</span>
+        <span class="ln">(b) A = 20 000(1,08)⁵ = R29 386,56</span>
+      </div></details>
+    </article>
+
+    <article class="type" id="fin-2">
+      <header><span class="tag">TYPE 2</span><h3>Depreciation: straight-line and reducing balance</h3><label class="got"><input type="checkbox" data-k="fin-2"> Got it</label></header>
+      <p class="say">“A machine costing R250 000 depreciates at 15% p.a. on the reducing-balance method. (a) Value after 4 years? (b) After how many years is the value half of its cost?”</p>
+      <ol class="how"><li>Straight-line: A = P(1 − in). Reducing balance: A = P(1 − i)ⁿ.</li><li>“How long”: write the equation, divide by P, take logs.</li></ol>
+      <details class="ex" open><summary>Worked example</summary><div class="sol">
+        <span class="ln">(a) A = 250 000(0,85)⁴ = R130 501,56</span>
+        <span class="ln">(b) 125 000 = 250 000(0,85)ⁿ  →  0,85ⁿ = 0,5</span>
+        <span class="ln">n = log 0,5 / log 0,85 = 4,27 years</span>
+        <span class="ln">Straight-line for comparison: 250 000(1 − 0,15 × 4) = R100 000</span>
+      </div></details>
+    </article>
+
+    <article class="type" id="fin-3">
+      <header><span class="tag">TYPE 3</span><h3>Nominal and effective interest rates</h3><label class="got"><input type="checkbox" data-k="fin-3"> Got it</label></header>
+      <p class="say">“Calculate the effective annual rate equivalent to 12% p.a. compounded monthly.” · “Find the nominal rate, compounded quarterly, that is equivalent to an effective rate of 10%.”</p>
+      <ol class="how"><li>m = periods per year (monthly 12, quarterly 4, half-yearly 2).</li><li>Put the rate you know in the formula, solve for the other.</li><li>Going backwards: take the m-th root of 1,1 (calculator: ^(1/4)).</li></ol>
+      <details class="ex" open><summary>Worked example</summary><div class="sol">
+        <span class="ln">1 + i<sub>eff</sub> = (1 + 0,12/12)¹² = 1,126825…</span>
+        <span class="ln">i<sub>eff</sub> = 12,68%</span>
+        <span class="ln">(1 + i/4)⁴ = 1,10  →  1 + i/4 = 1,10^(1/4) = 1,024114…</span>
+        <span class="ln">i = 4 × 0,024114 = 9,65% p.a. compounded quarterly</span>
+      </div></details>
+    </article>
+
+    <article class="type" id="fin-4">
+      <header><span class="tag">TYPE 4</span><h3>Changing interest rates and timelines with deposits or withdrawals</h3><label class="got"><input type="checkbox" data-k="fin-4"> Got it</label></header>
+      <p class="say">“R20 000 earns 8% p.a. compounded quarterly for 2 years, then 9% p.a. compounded monthly for 3 years. Calculate the final amount.” · “R10 000 is invested at 8% p.a. compounded annually. After 2 years R3 000 is withdrawn. What is the balance after 5 years?”</p>
+      <ol class="how"><li>Draw a timeline. Mark every deposit, withdrawal and rate change.</li><li>Grow the money one stretch at a time. Apply the deposit or withdrawal at its moment, then keep growing.</li><li>Do not round between steps.</li></ol>
+      <details class="ex" open><summary>Worked example</summary><div class="sol">
+        <span class="ln">After 2 years: 20 000(1 + 0,08/4)⁸ = R23 433,19</span>
+        <span class="ln">Final: 23 433,19 × (1 + 0,09/12)³⁶ = R30 665,73</span>
+        <span class="ln">Withdrawal: 10 000(1,08)² = 11 664 → minus 3 000 = 8 664</span>
+        <span class="ln">Balance: 8 664 × (1,08)³ = R10 914,14</span>
+      </div></details>
+    </article>
+
+    <article class="type" id="fin-5">
+      <header><span class="tag">TYPE 5</span><h3>Future value annuity: savings and sinking funds</h3><label class="got"><input type="checkbox" data-k="fin-5"> Got it</label></header>
+      <p class="say">“R1 000 is deposited at the end of every month for 5 years at 9% p.a. compounded monthly. What is the final value?” · “How much must be saved monthly to have R150 000 in 4 years at 8% p.a. compounded monthly? (sinking fund)”</p>
+      <ol class="how"><li>i = rate/12, n = years × 12.</li><li>Fv formula for the amount. To find x: rearrange <span class="f">x = F·i / [(1 + i)ⁿ − 1]</span>.</li><li>Sinking fund = saving to replace an asset: same formula.</li></ol>
+      <details class="ex" open><summary>Worked example</summary><div class="sol">
+        <span class="ln">i = 0,0075, n = 60:  F = 1000[(1,0075)⁶⁰ − 1]/0,0075 = R75 424,14</span>
+        <span class="ln">i = 0,08/12, n = 48:  x = 150 000(0,08/12)/[(1 + 0,08/12)⁴⁸ − 1]</span>
+        <span class="ans">x = R2 661,94 per month</span>
+      </div></details>
+      <p class="tip">Deposits start <em>now</em> (first payment at time 0)? Add one extra period of interest: the answer is F × (1 + i), or use n + 1 payments and subtract one payment.</p>
+    </article>
+
+    <article class="type" id="fin-6">
+      <header><span class="tag">TYPE 6</span><h3>Present value annuity: loan and bond repayments</h3><label class="got"><input type="checkbox" data-k="fin-6"> Got it</label></header>
+      <p class="say">“A loan of R800 000 is repaid over 20 years at 10,5% p.a. compounded monthly. Calculate the monthly instalment.” · “What is the present value of R2 500 per month for 3 years at 7,5%?”</p>
+      <ol class="how"><li>i = rate/12, n = months.</li><li>Rearrange: <span class="f">x = P·i / [1 − (1 + i)⁻ⁿ]</span>.</li><li>First payment one month after the loan is taken, unless told otherwise.</li></ol>
+      <details class="ex" open><summary>Worked example</summary><div class="sol">
+        <span class="ln">i = 0,105/12, n = 240</span>
+        <span class="ln">x = 800 000(0,105/12) / [1 − (1 + 0,105/12)⁻²⁴⁰]</span>
+        <span class="ans">x = R7 987,04</span>
+        <span class="ln">PV of R2 500 × 36 months at 7,5%: R80 369,78</span>
+      </div></details>
+    </article>
+
+    <article class="type" id="fin-7">
+      <header><span class="tag">TYPE 7</span><h3>Outstanding balance after some payments</h3><label class="got"><input type="checkbox" data-k="fin-7"> Got it</label></header>
+      <p class="say">“Calculate the balance owing immediately after the 60th payment.”</p>
+      <ol class="how"><li><b>Method A (fastest):</b> balance = present value of the payments still to come. Remaining n = total − paid.</li><li><b>Method B:</b> loan grown for k months minus the future value of the k payments made.</li><li>Both give the same answer. Method A is one calculation.</li></ol>
+      <details class="ex" open><summary>Worked example (same loan as Type 6)</summary><div class="sol">
+        <span class="ln">Remaining payments: 240 − 60 = 180</span>
+        <span class="ln">Balance = 7 987,04 × [1 − (1 + 0,105/12)⁻¹⁸⁰] / (0,105/12)</span>
+        <span class="ans">= R722 548,12</span>
+      </div></details>
+    </article>
+
+    <article class="type" id="fin-8">
+      <header><span class="tag">TYPE 8</span><h3>How long? (finding n with logs)</h3><label class="got"><input type="checkbox" data-k="fin-8"> Got it</label></header>
+      <p class="say">“How long will it take for R5 000 to grow to R8 000 at 7,5% p.a. compounded monthly?” · “How many payments of R9 000 will repay a R500 000 loan at 12% p.a. compounded monthly?”</p>
+      <ol class="how"><li>Substitute everything except n.</li><li>Isolate (1 + i)ⁿ or (1 + i)⁻ⁿ.</li><li>Take logs: <span class="f">n = log(value) / log(1 + i)</span>. Mind the negative exponent in PV.</li><li>Convert months to years if the question asks for years. Round loan payments up.</li></ol>
+      <details class="ex" open><summary>Worked example</summary><div class="sol">
+        <span class="ln">8 000 = 5 000(1 + 0,075/12)ⁿ  →  (1,00625)ⁿ = 1,6</span>
+        <span class="ln">n = log 1,6 / log 1,00625 = 75,4 months ≈ 6,29 years</span>
+        <span class="ln">Loan: 500 000 = 9 000[1 − 1,01⁻ⁿ]/0,01  →  1,01⁻ⁿ = 1 − 0,5556 = 0,4444</span>
+        <span class="ln">n = −log 0,4444 / log 1,01 = 81,5</span>
+        <span class="ans">82 payments (the last one is smaller)</span>
+      </div></details>
+    </article>
+
+    <article class="type" id="fin-9">
+      <header><span class="tag">TYPE 9</span><h3>Delayed start (first payment later) and payments at the start</h3><label class="got"><input type="checkbox" data-k="fin-9"> Got it</label></header>
+      <p class="say">“No repayments are made for the first 6 months…” · “The first deposit is made today.” · “The first repayment is made 4 months after the loan was granted.”</p>
+      <ol class="how"><li>Draw the timeline and mark where payment 1 falls.</li><li>The PV formula values payments <b>one period before the first payment</b>. If payment 1 is at month 4, that is month 3.</li><li>So grow the loan for (4 − 1) = 3 months first: new P = P(1 + i)³. Then use the normal formula with n = number of payments.</li><li>Payment at the start of each period: treat it as one period earlier. Or add the payment made now separately.</li></ol>
+      <p class="tip">Rule to repeat in the exam: <b>PV formula sits one period before the first payment. FV formula sits at the last payment.</b></p>
+    </article>
+
+  </div>
+
+  <div class="box trap">
+    <h3>Traps in this topic</h3>
+    <ul>
+      <li>Using 9% instead of 0,0075 as i. Always divide by 12 for monthly.</li>
+      <li>n in years but i monthly. They must match.</li>
+      <li>Rounding i or the bracket early. Keep the full calculator value.</li>
+      <li>Forgetting the negative sign in (1 + i)⁻ⁿ.</li>
+      <li>Writing the answer without a Rand sign or with 3 decimals. Money is 2 decimals.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ============ FUNCTIONS ============ -->
+<section class="topic fun" id="fun">
+  <div class="band"><div><h2>Functions and Graphs</h2><div class="sub">Usually Questions 5, 6 and 7</div></div><div class="marks">35 marks</div></div>
+
+  <div class="box must tint">
+    <h3>Must know</h3>
+    <div class="tbl"><table>
+      <tr><th>Function</th><th>Form</th><th>Key features</th></tr>
+      <tr><td>Parabola</td><td><span class="f">y = a(x − p)² + q</span> or <span class="f">y = ax² + bx + c</span></td><td>Turning point (p; q), axis x = p = −b/2a. a &gt; 0 smile (minimum), a &lt; 0 frown (maximum). y-intercept c.</td></tr>
+      <tr><td>Hyperbola</td><td><span class="f">y = a/(x − p) + q</span></td><td>Asymptotes x = p and y = q. a &gt; 0: branches in 1st and 3rd quadrants (of the shifted axes). a &lt; 0: 2nd and 4th. Symmetry lines y = ±(x − p) + q.</td></tr>
+      <tr><td>Exponential</td><td><span class="f">y = a·bˣ + q</span></td><td>Asymptote y = q. b &gt; 1 increasing, 0 &lt; b &lt; 1 decreasing. Domain: all reals. Passes (0; a + q).</td></tr>
+      <tr><td>Logarithm</td><td><span class="f">y = log<sub>b</sub>x</span></td><td>Inverse of y = bˣ. Asymptote x = 0. x-intercept (1; 0). Domain x &gt; 0. Passes (b; 1).</td></tr>
+      <tr><td>Straight line</td><td><span class="f">y = mx + c</span></td><td>m = (y₂ − y₁)/(x₂ − x₁). Inverse of a line is a line.</td></tr>
+    </table></div>
+    <ul>
+      <li>Inverse: swap x and y, solve for y. Graph of f⁻¹ is the reflection of f in the line <span class="f">y = x</span>. Domain and range swap.</li>
+      <li>Transformations: <span class="f">f(x) + q</span> up q · <span class="f">f(x + p)</span> left p · <span class="f">−f(x)</span> reflect in x-axis · <span class="f">f(−x)</span> reflect in y-axis · <span class="f">a·f(x)</span> stretch vertically.</li>
+    </ul>
+  </div>
+
+  <div class="types">
+
+    <article class="type" id="fun-1">
+      <header><span class="tag">TYPE 1</span><h3>Find the equation from a graph</h3><label class="got"><input type="checkbox" data-k="fun-1"> Got it</label></header>
+      <p class="say">“The sketch shows f(x) = a(x + 1)(x − 5)… Determine a.” · “Determine the equation of g if its asymptotes are x = −2 and y = 1 and it passes through (0; 3).” · “f(x) = a·bˣ passes through (0; 3) and (2; 12).”</p>
+      <ol class="how"><li>Pick the form that matches the information you can read: intercepts → factor form; turning point → vertex form; asymptotes → hyperbola/exponential form.</li><li>Substitute a <b>known point</b> to find the last unknown.</li><li>Check with a second point.</li></ol>
+      <details class="ex" open><summary>Worked examples</summary><div class="sol">
+        <span class="ln">Parabola: intercepts −1 and 5, passes (0; −5)</span>
+        <span class="ln">y = a(x + 1)(x − 5);  −5 = a(1)(−5)  →  a = 1</span>
+        <span class="ln">y = x² − 4x − 5</span>
+        <span class="ln">Hyperbola: y = a/(x + 2) + 1, point (0; 3)</span>
+        <span class="ln">3 = a/2 + 1  →  a = 4:   y = 4/(x + 2) + 1</span>
+        <span class="ln">Exponential: a = 3 (x = 0); 3b² = 12 → b² = 4</span>
+        <span class="ans">b = 2 (b &gt; 0), f(x) = 3·2ˣ</span>
+      </div></details>
+    </article>
+
+    <article class="type" id="fun-2">
+      <header><span class="tag">TYPE 2</span><h3>Parabola: every feature they ask for</h3><label class="got"><input type="checkbox" data-k="fun-2"> Got it</label></header>
+      <p class="say">“Determine the coordinates of the turning point, the intercepts, the equation of the axis of symmetry, the range, and for which values of x is f(x) ≥ 0 / f increasing.”</p>
+      <ol class="how"><li>x-intercepts: f(x) = 0. y-intercept: x = 0.</li><li>Turning point: x = −b/2a, then substitute for y. Or the midpoint of the two x-intercepts.</li><li>Range: y ≥ q (smile) or y ≤ q (frown).</li><li>Read increasing/decreasing and sign from the sketch.</li></ol>
+      <details class="ex" open><summary>Worked example: f(x) = x² − 4x − 5</summary><div class="sol">
+        <span class="ln">(x − 5)(x + 1): x-intercepts (5; 0) and (−1; 0), y-intercept (0; −5)</span>
+        <span class="ln">x = 4/2 = 2,  f(2) = −9:  turning point (2; −9)</span>
+        <span class="ln">Axis: x = 2.   Range: y ≥ −9.</span>
+        <span class="ln">f(x) ≥ 0: x ≤ −1 or x ≥ 5.   Increasing: x &gt; 2.</span>
+      </div></details>
+    </article>
+
+    <article class="type" id="fun-3">
+      <header><span class="tag">TYPE 3</span><h3>Hyperbola: asymptotes, intercepts, sketch</h3><label class="got"><input type="checkbox" data-k="fun-3"> Got it</label></header>
+      <p class="say">“Write down the equations of the asymptotes.” · “Determine the intercepts.” · “Determine the equation of the axis of symmetry with positive gradient.”</p>
+      <ol class="how"><li>Asymptotes: denominator zero gives x = p; the added constant gives y = q.</li><li>y-intercept: x = 0. x-intercept: y = 0.</li><li>Symmetry lines pass through (p; q) with gradient +1 and −1.</li></ol>
+      <details class="ex" open><summary>Worked example: g(x) = 2/(x − 1) + 3</summary><div class="sol">
+        <span class="ln">Asymptotes: x = 1 and y = 3</span>
+        <span class="ln">y-intercept: 2/(−1) + 3 = 1  →  (0; 1)</span>
+        <span class="ln">x-intercept: 2/(x − 1) = −3  →  x = 1/3</span>
+        <span class="ln">Symmetry lines: y = x + 2 and y = −x + 4</span>
+      </div></details>
+    </article>
+
+    <article class="type" id="fun-4">
+      <header><span class="tag">TYPE 4</span><h3>Exponential and logarithm graphs</h3><label class="got"><input type="checkbox" data-k="fun-4"> Got it</label></header>
+      <p class="say">“The graph of g(x) = log<sub>b</sub>x passes through (9; 2). Determine b.” · “Write down the equation of the asymptote of f(x) = 2ˣ − 3.” · “Determine the range of f.”</p>
+      <ol class="how"><li>Log through a point: substitute, convert to exponential form (b² = 9, so b = 3).</li><li>Exponential asymptote is the constant added: y = q. Range y &gt; q (when a &gt; 0).</li><li>Reflection of bˣ in the y-axis is (1/b)ˣ = b⁻ˣ.</li></ol>
+      <details class="ex" open><summary>Worked example</summary><div class="sol">
+        <span class="ln">log<sub>b</sub>9 = 2  →  b² = 9  →  b = 3 (b &gt; 0)</span>
+        <span class="ln">f(x) = 2ˣ − 3: asymptote y = −3, range y &gt; −3, y-intercept (0; −2)</span>
+      </div></details>
+    </article>
+
+    <article class="type" id="fun-5">
+      <header><span class="tag">TYPE 5</span><h3>Inverse functions</h3><label class="got"><input type="checkbox" data-k="fun-5"> Got it</label></header>
+      <p class="say">“Determine the equation of f⁻¹ in the form y = …” · “Sketch f and f⁻¹ on the same system.” · “Restrict the domain of f so that f⁻¹ is a function.” · “Write f⁻¹ in the form y = log…”</p>
+      <ol class="how"><li>Swap x and y. Make y the subject.</li><li>Exponential becomes log: x = a·bʸ gives y = log<sub>b</sub>(x/a).</li><li>Parabola: the inverse is not a function (fails the vertical line test). Restrict the parabola to x ≥ p (or x ≤ p).</li><li>Sketch: reflect points in y = x. Intercepts swap, asymptotes swap.</li></ol>
+      <details class="ex" open><summary>Worked examples</summary><div class="sol">
+        <span class="ln">f(x) = 3x − 6:  x = 3y − 6  →  f⁻¹(x) = (x + 6)/3</span>
+        <span class="ln">f(x) = 3·2ˣ:  x = 3·2ʸ  →  2ʸ = x/3  →  y = log₂(x/3)</span>
+        <span class="ln">f(x) = 2x²:  x = 2y²  →  y = ±√(x/2)  (not a function)</span>
+        <span class="ln">Restrict x ≥ 0:  f⁻¹(x) = √(x/2),  domain x ≥ 0</span>
+      </div></details>
+    </article>
+
+    <article class="type" id="fun-6">
+      <header><span class="tag">TYPE 6</span><h3>Transformations</h3><label class="got"><input type="checkbox" data-k="fun-6"> Got it</label></header>
+      <p class="say">“g(x) = f(x − 2) + 1. Describe the transformation.” · “Write down the equation of h if h is f reflected in the y-axis.” · “Write down the new asymptote.”</p>
+      <ol class="how"><li>Inside the bracket moves left/right, <b>opposite to the sign</b>: (x − 2) shifts right 2.</li><li>Outside moves up/down with the sign.</li><li>Move every key point (turning point, asymptote, intercept) with the same rule.</li></ol>
+      <details class="ex" open><summary>Worked example</summary><div class="sol">
+        <span class="ln">f(x) = x² has turning point (0; 0)</span>
+        <span class="ln">g(x) = (x − 2)² + 1: turning point (2; 1)</span>
+        <span class="ln">f(x) = 2ˣ reflected in y-axis: h(x) = 2⁻ˣ = (½)ˣ</span>
+        <span class="ln">y = 1/x shifted by f(x + 3) − 2: asymptotes x = −3 and y = −2</span>
+      </div></details>
+    </article>
+
+    <article class="type" id="fun-7">
+      <header><span class="tag">TYPE 7</span><h3>Intersections and “for which x is f(x) &gt; g(x)”</h3><label class="got"><input type="checkbox" data-k="fun-7"> Got it</label></header>
+      <p class="say">“Determine the coordinates of the points of intersection.” · “For which values of x is f(x) &gt; g(x)?” · “For which values of x is f(x)·g(x) &lt; 0?” · “For which x is f(x) ≤ 0?”</p>
+      <ol class="how"><li>Intersection: set f(x) = g(x), solve, then find y.</li><li>f(x) &gt; g(x): the x-values where the graph of f is <b>above</b> g. Read from the sketch between the intersection x-values.</li><li>Product &lt; 0: one graph above the x-axis, the other below.</li><li>Always give x-intervals, not y-values.</li></ol>
+    </article>
+
+    <article class="type" id="fun-8">
+      <header><span class="tag">TYPE 8</span><h3>How many solutions? (f(x) = k)</h3><label class="got"><input type="checkbox" data-k="fun-8"> Got it</label></header>
+      <p class="say">“For which values of k does f(x) = k have two distinct real roots? / no real roots?”</p>
+      <ol class="how"><li>Draw the horizontal line y = k across the graph.</li><li>Count where it cuts. Turning point height is the boundary.</li></ol>
+      <details class="ex" open><summary>Worked example: f(x) = x² − 4x − 5 (minimum −9)</summary><div class="sol">
+        <span class="ln">k &gt; −9: two distinct roots</span>
+        <span class="ln">k = −9: one root (equal roots)</span>
+        <span class="ln">k &lt; −9: no real roots</span>
+      </div></details>
+      <p class="tip">Algebraic version: write x² − 4x − 5 − k = 0 and use Δ.</p>
+    </article>
+
+    <article class="type" id="fun-9">
+      <header><span class="tag">TYPE 9</span><h3>Maximum vertical distance between two graphs</h3><label class="got"><input type="checkbox" data-k="fun-9"> Got it</label></header>
+      <p class="say">“PQ is a vertical line segment between the parabola and the line. Determine the maximum length of PQ.” · “Determine the value of x for which the distance is a minimum.”</p>
+      <ol class="how"><li>Length = (top graph) − (bottom graph) at the same x.</li><li>This is a new function D(x), usually a parabola. Find its turning point: x = −b/2a, or D′(x) = 0.</li><li>Check x lies between the intersection points.</li></ol>
+      <details class="ex" open><summary>Worked example: f(x) = x² − 4x − 5, g(x) = x − 1</summary><div class="sol">
+        <span class="ln">Intersection: x² − 5x − 4 = 0, x ≈ −0,70 and 5,70</span>
+        <span class="ln">Between them g is on top: D = (x − 1) − (x² − 4x − 5) = −x² + 5x + 4</span>
+        <span class="ln">x = −5/(2·(−1)) = 2,5:  D = −6,25 + 12,5 + 4</span>
+        <span class="ans">Maximum length = 10,25 units</span>
+      </div></details>
+    </article>
+
+    <article class="type" id="fun-10">
+      <header><span class="tag">TYPE 10</span><h3>Sketching</h3><label class="got"><input type="checkbox" data-k="fun-10"> Got it</label></header>
+      <p class="say">“Sketch the graphs of f and g on the same system of axes. Show all intercepts, turning points and asymptotes.”</p>
+      <ol class="how"><li>Parabola: intercepts + turning point, smooth curve.</li><li>Hyperbola: dashed asymptotes first, then two branches that approach but never touch them.</li><li>Exponential: dashed asymptote, y-intercept, one more point.</li><li>Label coordinates on the sketch. Marks go to labelled features.</li></ol>
+    </article>
+
+  </div>
+
+  <div class="box trap">
+    <h3>Traps in this topic</h3>
+    <ul>
+      <li>(x − 2) moves the graph <b>right</b> 2, not left.</li>
+      <li>Asymptotes written as numbers. Write the equation: y = 3.</li>
+      <li>Giving a range as x-values, or a domain as y-values.</li>
+      <li>Hyperbola “x-intercept”: set the whole function to zero and solve. Don’t set the denominator to zero.</li>
+      <li>Sketch with no labels. You lose the sketch marks even if the shape is right.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ============ CALCULUS ============ -->
+<section class="topic cal" id="cal">
+  <div class="band"><div><h2>Differential Calculus</h2><div class="sub">Usually Questions 8, 9, 10 and sometimes 11</div></div><div class="marks">35 marks</div></div>
+
+  <div class="box must tint">
+    <h3>Must know</h3>
+    <ul>
+      <li>First principles: <span class="f">f′(x) = lim<sub>h→0</sub> [f(x + h) − f(x)] / h</span></li>
+      <li>Power rule: <span class="f">d/dx (xⁿ) = n·xⁿ⁻¹</span>. Constant → 0. Notation: f′(x), dy/dx, D<sub>x</sub>.</li>
+      <li>Rewrite first: <span class="f">√x = x^(1/2)</span> · <span class="f">1/x² = x⁻²</span> · <span class="f">3/√x = 3x^(−1/2)</span> · expand brackets · simplify fractions.</li>
+      <li>Tangent: gradient m = f′(a), then <span class="f">y − y₁ = m(x − x₁)</span>. Horizontal tangent: f′ = 0. Parallel lines: same m. Perpendicular: m₁·m₂ = −1.</li>
+      <li>Turning points: <span class="f">f′(x) = 0</span>. Increasing: f′ &gt; 0. Decreasing: f′ &lt; 0.</li>
+      <li>Concavity: <span class="f">f″ &gt; 0</span> concave up, <span class="f">f″ &lt; 0</span> concave down. Inflection point: f″ = 0 with a change of concavity.</li>
+      <li>Right-prism formulas must be known: cuboid V = lbh · cylinder V = πr²h, S = 2πr² + 2πrh. Cones/spheres are given in the question.</li>
+    </ul>
+  </div>
+
+  <div class="types">
+
+    <article class="type" id="cal-1">
+      <header><span class="tag">TYPE 1</span><h3>Differentiate from first principles</h3><label class="got"><input type="checkbox" data-k="cal-1"> Got it</label></header>
+      <p class="say">“Determine f′(x) from first principles if f(x) = 3x² − 2x.” · “… if f(x) = 2/x.”</p>
+      <ol class="how"><li>Write the definition. Calculate f(x + h) in brackets.</li><li>Subtract f(x). Everything without h cancels. Factor h and cancel it.</li><li>Only then take the limit. Keep writing lim<sub>h→0</sub> until you cancel h.</li></ol>
+      <details class="ex" open><summary>Worked examples</summary><div class="sol">
+        <span class="ln">f(x + h) − f(x) = 3(x + h)² − 2(x + h) − 3x² + 2x</span>
+        <span class="ln">= 6xh + 3h² − 2h = h(6x + 3h − 2)</span>
+        <span class="ln">f′(x) = lim (6x + 3h − 2) = 6x − 2</span>
+        <span class="ln">f(x) = 2/x:  [2/(x + h) − 2/x]/h = [2x − 2(x + h)] / [x(x + h)h]</span>
+        <span class="ln">= −2h / [x(x + h)h] = −2/[x(x + h)]</span>
+        <span class="ans">f′(x) = −2/x²</span>
+      </div></details>
+    </article>
+
+    <article class="type" id="cal-2">
+      <header><span class="tag">TYPE 2</span><h3>Differentiate using the rules</h3><label class="got"><input type="checkbox" data-k="cal-2"> Got it</label></header>
+      <p class="say">“Determine f′(x) if f(x) = 2x³ − 5x + 4/x² − √x.” · “Determine D<sub>x</sub>[(2x − 1)²].” · “Determine dy/dx if y = (x² − 9)/(x − 3).”</p>
+      <ol class="how"><li>Rewrite every term as a power of x. Expand or simplify first.</li><li>Differentiate term by term.</li><li>If asked, write the answer back with positive exponents.</li></ol>
+      <details class="ex" open><summary>Worked examples</summary><div class="sol">
+        <span class="ln">f(x) = 2x³ − 5x + 4x⁻² − x^(1/2)</span>
+        <span class="ln">f′(x) = 6x² − 5 − 8x⁻³ − ½x^(−1/2)</span>
+        <span class="ln">(2x − 1)² = 4x² − 4x + 1  →  8x − 4</span>
+        <span class="ln">y = (x − 3)(x + 3)/(x − 3) = x + 3  →  dy/dx = 1</span>
+      </div></details>
+    </article>
+
+    <article class="type" id="cal-3">
+      <header><span class="tag">TYPE 3</span><h3>Equation of a tangent</h3><label class="got"><input type="checkbox" data-k="cal-3"> Got it</label></header>
+      <p class="say">“Determine the equation of the tangent to f at x = 3.” · “Determine the equation of the tangent to f that is parallel to y = −2x + 1.” · “Determine the point where the tangent is horizontal.”</p>
+      <ol class="how"><li>Point: if you are given x, find y from f(x).</li><li>Gradient: f′ at that x. If given a parallel line, solve f′(x) = its gradient to find x.</li><li>Use y − y₁ = m(x − x₁). Simplify to y = mx + c.</li></ol>
+      <details class="ex" open><summary>Worked example: f(x) = x² − 4x − 5</summary><div class="sol">
+        <span class="ln">f′(x) = 2x − 4.  At x = 3: m = 2, f(3) = −8</span>
+        <span class="ln">y + 8 = 2(x − 3)  →  y = 2x − 14</span>
+        <span class="ln">Parallel to y = −2x + 1: 2x − 4 = −2 → x = 1, f(1) = −8</span>
+        <span class="ln">y + 8 = −2(x − 1)  →  y = −2x − 6</span>
+      </div></details>
+    </article>
+
+    <article class="type" id="cal-4">
+      <header><span class="tag">TYPE 4</span><h3>The cubic graph question (the big one)</h3><label class="got"><input type="checkbox" data-k="cal-4"> Got it</label></header>
+      <p class="say">“Given f(x) = x³ − 3x² − 9x + 27. (a) Show that (x − 3) is a factor. (b) Determine the x-intercepts. (c) Determine the coordinates of the turning points. (d) Sketch f. (e) Determine the x-coordinate of the point of inflection. (f) For which x is f concave up / f decreasing? (g) For which k does f(x) = k have three distinct real roots?”</p>
+      <ol class="how"><li><b>Factor theorem:</b> f(3) = 0 means (x − 3) is a factor. Divide to get the quadratic, factorise fully.</li><li>x-intercepts: factors = 0. y-intercept: f(0).</li><li>Turning points: f′(x) = 0, then f(x) for each y.</li><li>Inflection: f″(x) = 0.</li><li>Sketch with all of these labelled. Cubic with positive x³ coefficient rises on the right.</li></ol>
+      <details class="ex" open><summary>Worked example</summary><div class="sol">
+        <span class="ln">f(3) = 27 − 27 − 27 + 27 = 0 ✓</span>
+        <span class="ln">f(x) = (x − 3)(x² − 9) = (x − 3)²(x + 3)</span>
+        <span class="ln">x-intercepts: (−3; 0) and (3; 0).  y-intercept (0; 27)</span>
+        <span class="ln">f′(x) = 3x² − 6x − 9 = 3(x − 3)(x + 1)</span>
+        <span class="ln">x = −1: f = 32 → (−1; 32) local max</span>
+        <span class="ln">x = 3: f = 0 → (3; 0) local min (touches the x-axis)</span>
+        <span class="ln">f″(x) = 6x − 6 = 0 → x = 1, f(1) = 16 → inflection (1; 16)</span>
+        <span class="ln">Concave up: x &gt; 1.   Decreasing: −1 &lt; x &lt; 3.</span>
+        <span class="ans">Three distinct roots of f(x) = k: 0 &lt; k &lt; 32</span>
+      </div></details>
+      <p class="tip">The root at x = 3 is a double root, which is why the graph touches the axis there. Two equal roots at a turning point is a classic they test.</p>
+    </article>
+
+    <article class="type" id="cal-5">
+      <header><span class="tag">TYPE 5</span><h3>Find a, b, c, d from given information</h3><label class="got"><input type="checkbox" data-k="cal-5"> Got it</label></header>
+      <p class="say">“f(x) = x³ + ax² + bx has turning points at x = 1 and x = 3. Determine a and b.” · “The graph has a turning point at (2; −6) and passes through (0; 4).”</p>
+      <ol class="how"><li>Turning point at x = t: f′(t) = 0. A point (t; y): f(t) = y.</li><li>Each fact gives one equation. Solve the system.</li><li>Or use the roots of f′: sum of roots = −B/A, product = C/A.</li></ol>
+      <details class="ex" open><summary>Worked example</summary><div class="sol">
+        <span class="ln">f′(x) = 3x² + 2ax + b = 0 has roots 1 and 3</span>
+        <span class="ln">Sum: −2a/3 = 4 → a = −6.   Product: b/3 = 3 → b = 9</span>
+        <span class="ln">f(x) = x³ − 6x² + 9x:  f(1) = 4,  f(3) = 0 ✓</span>
+      </div></details>
+    </article>
+
+    <article class="type" id="cal-6">
+      <header><span class="tag">TYPE 6</span><h3>Read a graph of f′ (the derivative)</h3><label class="got"><input type="checkbox" data-k="cal-6"> Got it</label></header>
+      <p class="say">“The sketch shows the graph of f′(x), a parabola with x-intercepts −1 and 3. (a) For which x is f increasing? (b) At which x does f have a local maximum? (c) At which x is f concave down? (d) Determine f′(0).”</p>
+      <div class="tbl tint"><table>
+        <tr><th>What the graph of f′ does</th><th>What it tells you about f</th></tr>
+        <tr><td>Above the x-axis</td><td>f increasing</td></tr>
+        <tr><td>Below the x-axis</td><td>f decreasing</td></tr>
+        <tr><td>Crosses the x-axis: + to −</td><td>Local maximum of f</td></tr>
+        <tr><td>Crosses the x-axis: − to +</td><td>Local minimum of f</td></tr>
+        <tr><td>f′ is itself decreasing (going down)</td><td>f″ &lt; 0: f concave down</td></tr>
+        <tr><td>Turning point of f′</td><td>Point of inflection of f</td></tr>
+        <tr><td>Touches the x-axis without crossing</td><td>Stationary point of inflection, not a max or min</td></tr>
+      </table></div>
+      <details class="ex" open><summary>Answers for the f′ with roots −1 and 3 (opens upward)</summary><div class="sol">
+        <span class="ln">Increasing: x &lt; −1 or x &gt; 3.  Local max at x = −1, local min at x = 3.</span>
+        <span class="ln">f′ turning point at x = 1 (midway), so f has inflection at x = 1</span>
+        <span class="ln">Concave down for x &lt; 1 (f′ decreasing there)</span>
+      </div></details>
+      <p class="tip">Other direction: given the cubic f, they ask you to sketch f′. It is a parabola with x-intercepts at the turning-point x-values of f, and opens up if the cubic’s x³ coefficient is positive.</p>
+    </article>
+
+    <article class="type" id="cal-7">
+      <header><span class="tag">TYPE 7</span><h3>Optimisation (maximum / minimum problems)</h3><label class="got"><input type="checkbox" data-k="cal-7"> Got it</label></header>
+      <p class="say">“An open box with a square base has a total surface area of 48 m². Show that V = 12x − ¼x³. Determine x for the maximum volume.” · “A farmer has 100 m of fencing for a rectangular camp against a wall…” · “A cylindrical can has volume … minimise the surface area.”</p>
+      <ol class="how"><li>Draw and define the variables.</li><li>Constraint equation (given total area, perimeter, volume).</li><li>Make the thing to optimise a function of <b>one</b> variable.</li><li>Differentiate, set equal to 0, solve.</li><li>Confirm max or min (second derivative or sign change). Reject answers outside the allowed values.</li><li>Answer the question asked, with units.</li></ol>
+      <details class="ex" open><summary>Worked examples</summary><div class="sol">
+        <p class="q">Open box, base x by x, height h. Surface area 48.</p>
+        <span class="ln">x² + 4xh = 48  →  h = (48 − x²)/(4x)</span>
+        <span class="ln">V = x²h = x(48 − x²)/4 = 12x − ¼x³</span>
+        <span class="ln">V′ = 12 − ¾x² = 0  →  x² = 16  →  x = 4</span>
+        <span class="ln">V″ = −1,5x &lt; 0, so a maximum.  h = 32/16 = 2</span>
+        <span class="ans">x = 4 m, h = 2 m, V = 32 m³</span>
+        <p class="q" style="margin-top:8px">100 m fence, 3 sides, width x:  length = 100 − 2x</p>
+        <span class="ln">A = x(100 − 2x) = 100x − 2x²  →  A′ = 100 − 4x = 0</span>
+        <span class="ans">x = 25 m, length 50 m, A = 1 250 m²</span>
+      </div></details>
+    </article>
+
+    <article class="type" id="cal-8">
+      <header><span class="tag">TYPE 8</span><h3>Rates of change: average, instantaneous, motion</h3><label class="got"><input type="checkbox" data-k="cal-8"> Got it</label></header>
+      <p class="say">“A ball’s height is h(t) = −5t² + 20t. (a) Velocity after 1 s? (b) When is the velocity zero? (c) Maximum height? (d) When does it hit the ground? (e) Average velocity between t = 1 and t = 3?” · “At what rate is the volume changing with respect to the radius when r = 2?”</p>
+      <ol class="how"><li><b>Average</b> rate of change = gradient between two points: [f(b) − f(a)] / (b − a). No calculus.</li><li><b>Instantaneous</b> rate = derivative. Velocity = h′(t), acceleration = h″(t).</li><li>Maximum height: velocity = 0, then put that t into h(t).</li><li>Hits the ground: h(t) = 0.</li><li>Negative velocity means moving downward.</li></ol>
+      <details class="ex" open><summary>Worked example</summary><div class="sol">
+        <span class="ln">v(t) = h′(t) = −10t + 20.   v(1) = 10 m/s</span>
+        <span class="ln">v = 0: t = 2 s.   h(2) = −20 + 40 = 20 m (max height)</span>
+        <span class="ln">h = 0: −5t(t − 4) = 0  →  t = 4 s</span>
+        <span class="ln">Average velocity (1 to 3): [h(3) − h(1)] / 2 = (15 − 15)/2 = 0 m/s</span>
+        <span class="ln">v(4) = −20 m/s (20 m/s downward)</span>
+      </div></details>
+    </article>
+
+    <article class="type" id="cal-9">
+      <header><span class="tag">TYPE 9</span><h3>Concavity and points of inflection (interpretation questions)</h3><label class="got"><input type="checkbox" data-k="cal-9"> Got it</label></header>
+      <p class="say">“For which values of x is f concave up?” · “Where is the gradient of the tangent a minimum?” · “Show that f has no stationary points.”</p>
+      <ol class="how"><li>Concave up: f″(x) &gt; 0. Concave down: f″(x) &lt; 0.</li><li>The gradient of the tangent is smallest (or largest) at the inflection point, where f″ = 0.</li><li>No turning points: show f′(x) = 0 has Δ &lt; 0.</li></ol>
+      <details class="ex" open><summary>Example: f(x) = x³ + 3x + 1</summary><div class="sol">
+        <span class="ln">f′(x) = 3x² + 3 = 0 → x² = −1: no real solution</span>
+        <span class="ln">So there are no turning points (f′ is always positive: f always increasing).</span>
+      </div></details>
+    </article>
+
+    <article class="type" id="cal-10">
+      <header><span class="tag">TYPE 10</span><h3>Transformed cubic and “equal roots” conditions</h3><label class="got"><input type="checkbox" data-k="cal-10"> Got it</label></header>
+      <p class="say">“g(x) = f(x − 2) + 3. Determine the turning points of g.” · “For which values of k will f(x) = k have exactly one real root?” · “For which values of x is f′(x)·f″(x) &lt; 0?”</p>
+      <ol class="how"><li>Shift every key point: (x; y) of f moves to (x + 2; y + 3) for g(x) = f(x − 2) + 3.</li><li>One real root: line y = k above the local maximum or below the local minimum.</li><li>Product of f′ and f″: find where each is positive/negative, then use a sign table.</li></ol>
+      <details class="ex" open><summary>Using the cubic from Type 4</summary><div class="sol">
+        <span class="ln">g(x) = f(x − 2) + 3: turning points (1; 35) and (5; 3)</span>
+        <span class="ln">f(x) = k exactly one real root: k &gt; 32 or k &lt; 0</span>
+        <span class="ln">(k = 0 or 32 gives two roots, one of them a double root)</span>
+      </div></details>
+    </article>
+
+  </div>
+
+  <div class="box trap">
+    <h3>Traps in this topic</h3>
+    <ul>
+      <li>Differentiating before rewriting (4/x² must become 4x⁻²).</li>
+      <li>Giving only x at a turning point. They want (x; y) when they ask for coordinates.</li>
+      <li>Skipping h cancel in first principles, or dropping “lim” early.</li>
+      <li>Optimisation with two variables in V. Eliminate one first.</li>
+      <li>Not stating max or min justification.</li>
+      <li>Mixing up f′ = 0 (turning points) with f″ = 0 (inflection).</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ============ PROBABILITY ============ -->
+<section class="topic pro" id="pro">
+  <div class="band"><div><h2>Counting Principle and Probability</h2><div class="sub">Usually Questions 11 and 12</div></div><div class="marks">15 marks</div></div>
+
+  <div class="box must tint">
+    <h3>Must know</h3>
+    <ul>
+      <li><span class="f">P(A or B) = P(A) + P(B) − P(A and B)</span></li>
+      <li>Mutually exclusive: <span class="f">P(A and B) = 0</span> · Complementary: <span class="f">P(not A) = 1 − P(A)</span></li>
+      <li>Independent: <span class="f">P(A and B) = P(A) × P(B)</span>. This is also your <b>test</b> for independence.</li>
+      <li>Probability = favourable outcomes ÷ total outcomes. Always between 0 and 1.</li>
+      <li>Fundamental counting principle: multiply the choices for each position.</li>
+      <li>n different objects in a row: <span class="f">n!</span> · With repeats: <span class="f">n! / (a! · b!)</span></li>
+      <li>Dependent events (no replacement): the second probability changes.</li>
+    </ul>
+  </div>
+
+  <div class="types">
+
+    <article class="type" id="pro-1">
+      <header><span class="tag">TYPE 1</span><h3>Venn diagrams and the addition rule</h3><label class="got"><input type="checkbox" data-k="pro-1"> Got it</label></header>
+      <p class="say">“P(A) = 0,4; P(B) = 0,5; P(A or B) = 0,7. Calculate P(A and B).” · “40 learners: 22 take Maths, 18 take Science, 8 take both…”</p>
+      <ol class="how"><li>Start the Venn with the <b>overlap</b> (both). Then each “only”, then “neither”.</li><li>Everything adds to the total (1 or the number of learners).</li><li>Use algebra (x for the overlap) when the numbers are not given directly.</li></ol>
+      <details class="ex" open><summary>Worked examples</summary><div class="sol">
+        <span class="ln">0,7 = 0,4 + 0,5 − P(A and B)  →  P(A and B) = 0,2</span>
+        <span class="ln">Maths only 22 − 8 = 14; Science only 18 − 8 = 10; both 8</span>
+        <span class="ln">Neither = 40 − (14 + 10 + 8) = 8  →  P(neither) = 0,2</span>
+      </div></details>
+    </article>
+
+    <article class="type" id="pro-2">
+      <header><span class="tag">TYPE 2</span><h3>Are A and B independent / mutually exclusive?</h3><label class="got"><input type="checkbox" data-k="pro-2"> Got it</label></header>
+      <p class="say">“Show, with calculations, that A and B are independent.” · “Are the events mutually exclusive? Motivate.” · “Determine x if the events are independent.”</p>
+      <ol class="how"><li>Independent: compute P(A) × P(B) and compare with P(A and B). Equal means independent. Write the conclusion in words.</li><li>Mutually exclusive: P(A and B) = 0? If it is not 0, they are not.</li><li>Find an unknown: put the rule into an equation and solve.</li></ol>
+      <details class="ex" open><summary>Worked examples</summary><div class="sol">
+        <span class="ln">P(A) = 0,4, P(B) = 0,5, P(A and B) = 0,2:  0,4 × 0,5 = 0,2 ✓ independent</span>
+        <span class="ln">P(A and B) = 0,2 ≠ 0: not mutually exclusive</span>
+        <span class="ln">Classes: P(M) × P(S) = 0,55 × 0,45 = 0,2475 ≠ 0,2: not independent</span>
+        <span class="ln">Independent, P(A) = 0,3, P(A or B) = 0,65, P(B) = x:</span>
+        <span class="ln">0,3 + x − 0,3x = 0,65  →  0,7x = 0,35</span>
+        <span class="ans">x = 0,5</span>
+        <span class="ln">Mutually exclusive, P(A) = 0,3, P(B) = 2x, P(A or B) = 0,7: 0,3 + 2x = 0,7 → x = 0,2</span>
+      </div></details>
+    </article>
+
+    <article class="type" id="pro-3">
+      <header><span class="tag">TYPE 3</span><h3>Two-way tables (contingency tables)</h3><label class="got"><input type="checkbox" data-k="pro-3"> Got it</label></header>
+      <p class="say">“The table shows 100 learners by gender and whether they play soccer. Calculate the probability a random learner is a girl who plays soccer. Are ‘girl’ and ‘plays soccer’ independent?”</p>
+      <div class="tbl tint"><table>
+        <tr><th></th><th>Soccer</th><th>No soccer</th><th>Total</th></tr>
+        <tr><th>Boys</th><td>24</td><td>16</td><td>40</td></tr>
+        <tr><th>Girls</th><td>15</td><td>45</td><td>60</td></tr>
+        <tr><th>Total</th><td>39</td><td>61</td><td>100</td></tr>
+      </table></div>
+      <details class="ex" open><summary>Worked example</summary><div class="sol">
+        <span class="ln">P(girl and soccer) = 15/100 = 0,15</span>
+        <span class="ln">P(girl) × P(soccer) = 0,6 × 0,39 = 0,234 ≠ 0,15</span>
+        <span class="ans">Not independent</span>
+      </div></details>
+    </article>
+
+    <article class="type" id="pro-4">
+      <header><span class="tag">TYPE 4</span><h3>Tree diagrams (with and without replacement)</h3><label class="got"><input type="checkbox" data-k="pro-4"> Got it</label></header>
+      <p class="say">“A bag has 5 red and 3 blue balls. Two balls are drawn without replacement. Draw a tree diagram. Calculate P(both red), P(different colours), P(at least one blue).”</p>
+      <ol class="how"><li>Draw the branches. Write the probability on each branch.</li><li>Without replacement: numerator AND denominator change on the second draw.</li><li>Multiply along a path (AND). Add paths (OR).</li><li>“At least one”: 1 − P(none).</li><li>Check all end-point probabilities add to 1.</li></ol>
+      <details class="ex" open><summary>Worked example</summary><div class="sol">
+        <span class="ln">RR: 5/8 × 4/7 = 20/56 = 5/14</span>
+        <span class="ln">RB: 5/8 × 3/7 = 15/56    BR: 3/8 × 5/7 = 15/56    BB: 3/8 × 2/7 = 6/56</span>
+        <span class="ln">Different colours: 15/56 + 15/56 = 30/56 = 15/28</span>
+        <span class="ln">At least one blue: 1 − 20/56 = 36/56 = 9/14</span>
+        <span class="ln">Check: 20 + 15 + 15 + 6 = 56 ✓</span>
+      </div></details>
+    </article>
+
+    <article class="type" id="pro-5">
+      <header><span class="tag">TYPE 5</span><h3>Counting principle: codes, numbers, number plates</h3><label class="got"><input type="checkbox" data-k="pro-5"> Got it</label></header>
+      <p class="say">“How many 4-digit codes can be formed from 0–9 (a) with repetition (b) without repetition? (c) How many 4-digit numbers are even, no repetition, and do not start with 0?” · “A number plate has 3 letters, then 3 digits, then GP.”</p>
+      <ol class="how"><li>Draw a box for each position. Write the number of choices in each box.</li><li>Fill the <b>restricted positions first</b> (first digit not 0; last digit even).</li><li>Multiply the boxes. If one restriction splits into cases, calculate each case and add.</li><li>Check: total minus the opposite case.</li></ol>
+      <details class="ex" open><summary>Worked example</summary><div class="sol">
+        <span class="ln">(a) 10 × 10 × 10 × 10 = 10 000</span>
+        <span class="ln">(b) 10 × 9 × 8 × 7 = 5 040</span>
+        <span class="ln">(c) Last digit 0: 9 × 8 × 7 = 504</span>
+        <span class="ln">    Last digit 2, 4, 6 or 8: 4 × (8 first, since not 0 and not used) × 8 × 7 = 1 792</span>
+        <span class="ans">Even numbers: 504 + 1 792 = 2 296</span>
+        <span class="ln">Check: all 4-digit, no repeat = 9 × 9 × 8 × 7 = 4 536; odd = 5 × 8 × 8 × 7 = 2 240; 4 536 − 2 240 = 2 296 ✓</span>
+        <span class="ln">Number plate: 26³ × 10³ (×1 for GP) = 17 576 000</span>
+      </div></details>
+    </article>
+
+    <article class="type" id="pro-6">
+      <header><span class="tag">TYPE 6</span><h3>Arrangements of letters and people</h3><label class="got"><input type="checkbox" data-k="pro-6"> Got it</label></header>
+      <p class="say">“How many different arrangements of the letters of SCIENCE are possible? (a) in total (b) if S is the first letter (c) if the vowels must be together.” · “Six friends sit in a row. Two refuse to be apart / refuse to sit together.”</p>
+      <ol class="how"><li>All different: n!. Repeated letters: divide by the factorial of each repeat. (The question will say if identical letters are treated as the same.)</li><li>Fixed positions: remove those letters from the count.</li><li>“Must be together”: glue them into one block. Arrange the blocks, then arrange inside the block.</li><li>“Not together” = total − together.</li></ol>
+      <details class="ex" open><summary>Worked example</summary><div class="sol">
+        <span class="ln">SCIENCE: 7 letters, C twice, E twice</span>
+        <span class="ln">(a) 7!/(2! 2!) = 5040/4 = 1 260</span>
+        <span class="ln">(b) S first: remaining 6 letters, 6!/(2! 2!) = 180</span>
+        <span class="ln">Six friends, two together: block of 2 + 4 others = 5 items: 5! × 2! = 240</span>
+        <span class="ln">Not together: 6! − 240 = 720 − 240 = 480</span>
+      </div></details>
+    </article>
+
+    <article class="type" id="pro-7">
+      <header><span class="tag">TYPE 7</span><h3>Probability using counting</h3><label class="got"><input type="checkbox" data-k="pro-7"> Got it</label></header>
+      <p class="say">“A 4-digit PIN is chosen at random, digits can repeat. What is the probability all 4 digits are different? / at least two are the same?” · “What is the probability that a random arrangement of SCIENCE starts with S?”</p>
+      <ol class="how"><li>Total outcomes using the counting principle.</li><li>Favourable outcomes using the counting principle.</li><li>P = favourable / total. “At least” = 1 − P(opposite).</li></ol>
+      <details class="ex" open><summary>Worked example</summary><div class="sol">
+        <span class="ln">All different: 5 040 / 10 000 = 0,504</span>
+        <span class="ln">At least two the same: 1 − 0,504 = 0,496</span>
+        <span class="ln">SCIENCE starts with S: 180 / 1 260 = 1/7</span>
+      </div></details>
+    </article>
+
+  </div>
+
+  <div class="box trap">
+    <h3>Traps in this topic</h3>
+    <ul>
+      <li>Using the same denominator on the second draw when there is no replacement.</li>
+      <li>Saying “independent” without showing P(A) × P(B) = P(A and B).</li>
+      <li>Adding along a branch or multiplying across different branches. AND is multiply along, OR is add across.</li>
+      <li>Forgetting the leading-zero restriction in digit problems.</li>
+      <li>A probability above 1, or negative. That is always wrong.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ============ EXAM DAY ============ -->
+<section class="topic" id="last" style="--c:var(--fg)">
+  <div class="two">
+    <div class="plan">
+      <h3>First 5 minutes of the paper</h3>
+      <ol>
+        <li>Read the whole paper. Mark the parts you can do immediately.</li>
+        <li>Do those first, then return. Easy marks are never wasted.</li>
+        <li>Write the info-sheet formulas you tend to forget in the margin of your rough work.</li>
+      </ol>
+    </div>
+    <div class="plan">
+      <h3>Last 10 minutes</h3>
+      <ul>
+        <li>Check each answer for sense: probabilities between 0 and 1, lengths positive, money to 2 decimals.</li>
+        <li>Substitute solutions back (surds, logs, simultaneous equations).</li>
+        <li>Have a unit, a conclusion or a labelled sketch on every context question.</li>
+      </ul>
+    </div>
+    <div class="plan">
+      <h3>Bring</h3>
+      <ul><li>Scientific calculator with fresh batteries, pen, pencil, ruler, ID or admission letter, a water bottle if allowed.</li></ul>
+    </div>
+    <div class="plan">
+      <h3>If you freeze</h3>
+      <ul>
+        <li>Move on. Come back with a clear head.</li>
+        <li>Write down anything you know about the question: a formula, a given, a sketch. That is where method marks come from.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>Built from the DBE Grade 12 Mathematics exam guidelines (mark weightings, cognitive levels and what is not examined) and the recurring question styles of NSC Paper 1. Worked examples are original and were checked by calculation. Always use your own information sheet in the exam.</p>
+  <p><a href="https://www.education.gov.za/Portals/0/CD/2021%20Exam%20Guidelines/Mathematics%20GR%2012%20Exam%20Guidelines%202021%20Eng.pdf" target="_blank" rel="noopener">DBE Mathematics Grade 12 Exam Guidelines</a></p>
+</footer>
+
+</div>
+
+<script>
+(function(){
+  // jump buttons
+  var navBtns=[].slice.call(document.querySelectorAll('.nav [data-go]'));
+  function go(id){var el=document.getElementById(id); if(el){el.scrollIntoView({behavior:'smooth',block:'start'});}}
+  [].forEach.call(document.querySelectorAll('[data-go]'),function(b){b.addEventListener('click',function(){go(b.getAttribute('data-go'));});});
+
+  // highlight active topic
+  var ids=['plan','alg','pat','fin','fun','cal','pro','last'];
+  if('IntersectionObserver' in window){
+    var io=new IntersectionObserver(function(es){
+      es.forEach(function(e){ if(e.isIntersecting){ navBtns.forEach(function(b){b.classList.toggle('on',b.getAttribute('data-go')===e.target.id);}); }});
+    },{rootMargin:'-20% 0px -70% 0px'});
+    ids.forEach(function(i){var el=document.getElementById(i); if(el) io.observe(el);});
+  }
+
+  // expand / collapse all
+  var toggle=document.getElementById('toggleAll'), open=true;
+  toggle.addEventListener('click',function(){
+    open=!open;
+    [].forEach.call(document.querySelectorAll('details.ex'),function(d){d.open=open;});
+    toggle.textContent=open?'Collapse all worked examples':'Expand all worked examples';
+  });
+
+  // progress ticks (per viewer, optional)
+  var boxes=[].slice.call(document.querySelectorAll('.got input'));
+  var KEY='paper1pack-ticks';
+  var saved={};
+  try{saved=JSON.parse(localStorage.getItem(KEY)||'{}')||{};}catch(e){saved={};}
+  function update(){
+    var n=boxes.filter(function(b){return b.checked;}).length;
+    document.getElementById('progText').textContent=n+' of '+boxes.length+' question types ticked';
+    document.getElementById('progBar').style.width=(boxes.length?100*n/boxes.length:0)+'%';
+  }
+  boxes.forEach(function(b){
+    var k=b.getAttribute('data-k');
+    if(saved[k]) b.checked=true;
+    b.addEventListener('change',function(){
+      saved[k]=b.checked;
+      try{localStorage.setItem(KEY,JSON.stringify(saved));}catch(e){}
+      update();
+    });
+  });
+  update();
+})();
+</script>
+
+</body></html>
