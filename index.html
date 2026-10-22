@@ -162,7 +162,7 @@ footer a{color:var(--fg)}
       <h3>Method marks, every question</h3>
       <ul>
         <li>Write the formula, then substitute. A wrong final answer can still earn method marks.</li>
-        <li>Keep full calculator values until the last line. Round to 2 decimals only at the end.</li>
+        <li>Keep full calculator values until the final step. Round only as instructed in the question (money normally to two decimal places).</li>
         <li>“Show that…” gives you the answer. Use it in the next part even if you could not prove it.</li>
         <li>Do not cross out work unless you have replaced it.</li>
         <li>Label sketches: intercepts, turning points, asymptotes (dashed).</li>
@@ -196,7 +196,7 @@ footer a{color:var(--fg)}
       <li>Quadratic formula: <span class="f">x = (−b ± √(b² − 4ac)) / 2a</span></li>
       <li>Exponents: <span class="f">aᵐ·aⁿ = aᵐ⁺ⁿ</span> <span class="f">aᵐ ÷ aⁿ = aᵐ⁻ⁿ</span> <span class="f">(aᵐ)ⁿ = aᵐⁿ</span> <span class="f">a⁻ⁿ = 1/aⁿ</span> <span class="f">a^(m/n) = ⁿ√(aᵐ)</span> <span class="f">a⁰ = 1</span></li>
       <li>Logarithm definition: <span class="f">log<sub>a</sub>b = c ⇔ aᶜ = b</span> (a &gt; 0, a ≠ 1, b &gt; 0). Convert between logarithmic and exponential form. Logarithmic-law manipulation is not examined in NSC Paper 1.</li>
-      <li>Discriminant <span class="f">Δ = b² − 4ac</span>. Δ &gt; 0: two real unequal roots (rational if Δ is a perfect square). Δ = 0: two equal real roots. Δ &lt; 0: no real roots.</li>
+      <li>Discriminant <span class="f">Δ = b² − 4ac</span>. Δ &gt; 0: two real unequal roots (with rational coefficients, roots are rational when √Δ is rational). Δ = 0: two equal real roots. Δ &lt; 0: no real roots.</li>
       <li>Calculator: solve <span class="f">aˣ = b</span> with <span class="f">x = log b / log a</span>.</li>
     </ul>
   </div>
@@ -298,7 +298,7 @@ footer a{color:var(--fg)}
     <article class="type" id="alg-8">
       <header><span class="tag">TYPE 8</span><h3>Inequalities (quadratic and fractional)</h3><label class="got"><input type="checkbox" data-k="alg-8"> Got it</label></header>
       <p class="say">“Solve for x: x² − 2x − 3 &lt; 0” · “Solve for x: x/(x − 3) ≤ 2”</p>
-      <ol class="how"><li>Get 0 on one side. <b>Never multiply or divide by an expression with x.</b></li><li>Fraction? Combine into a single fraction.</li><li>Find critical values (numerator = 0 and denominator = 0).</li><li>Sketch the parabola, or draw a sign table. Pick the region(s) that match &lt; or &gt;.</li><li>Denominator zero is always excluded.</li></ol>
+      <ol class="how"><li>Get 0 on one side. Avoid multiplying or dividing by an x-expression unless you know its sign; multiplying or dividing by a negative reverses the inequality.</li><li>Fraction? Combine into a single fraction.</li><li>Find critical values (numerator = 0 and denominator = 0).</li><li>Sketch the parabola, or draw a sign table. Pick the region(s) that match &lt; or &gt;.</li><li>Denominator zero is always excluded.</li></ol>
       <details class="ex" open><summary>Worked example</summary><div class="sol">
         <p class="q">Solve x² − 2x − 3 &lt; 0.</p>
         <span class="ln">(x − 3)(x + 1) &lt; 0   (parabola below the x-axis)</span>
@@ -314,7 +314,7 @@ footer a{color:var(--fg)}
     <article class="type" id="alg-9">
       <header><span class="tag">TYPE 9</span><h3>Nature of the roots</h3><label class="got"><input type="checkbox" data-k="alg-9"> Got it</label></header>
       <p class="say">“For which values of k will x² − 4x + k = 0 have real roots?” · “Prove that the roots of x² + kx − 1 = 0 are real for all k.” · “Determine the value of k for which the roots are equal.”</p>
-      <ol class="how"><li>Write down a, b, c (k can be one of them) and <span class="f">Δ = b² − 4ac</span>.</li><li>Real roots: Δ ≥ 0. Equal roots: Δ = 0. Non-real: Δ &lt; 0. Rational: Δ a perfect square.</li><li>“Prove for all k”: show Δ is a square plus a positive number, or always positive.</li></ol>
+      <ol class="how"><li>Write down a, b, c (k can be one of them) and <span class="f">Δ = b² − 4ac</span>.</li><li>Real roots: Δ ≥ 0. Equal roots: Δ = 0. Non-real: Δ &lt; 0. With rational coefficients, rational roots require √Δ to be rational.</li><li>“Prove for all k”: show Δ is a square plus a positive number, or always positive.</li></ol>
       <details class="ex" open><summary>Worked example</summary><div class="sol">
         <span class="ln">x² − 4x + k = 0:  Δ = 16 − 4k ≥ 0  →  k ≤ 4</span>
         <span class="ln">x² + kx − 1 = 0:  Δ = k² + 4</span>
@@ -659,7 +659,7 @@ footer a{color:var(--fg)}
       <tr><th>Function</th><th>Form</th><th>Key features</th></tr>
       <tr><td>Parabola</td><td><span class="f">y = a(x − p)² + q</span> or <span class="f">y = ax² + bx + c</span></td><td>Turning point (p; q), axis x = p = −b/2a. a &gt; 0 smile (minimum), a &lt; 0 frown (maximum). y-intercept c.</td></tr>
       <tr><td>Hyperbola</td><td><span class="f">y = a/(x − p) + q</span></td><td>Asymptotes x = p and y = q. a &gt; 0: branches in 1st and 3rd quadrants (of the shifted axes). a &lt; 0: 2nd and 4th. Symmetry lines y = ±(x − p) + q.</td></tr>
-      <tr><td>Exponential</td><td><span class="f">y = a·bˣ + q</span></td><td>Asymptote y = q. b &gt; 1 increasing, 0 &lt; b &lt; 1 decreasing. Domain: all reals. Passes (0; a + q).</td></tr>
+      <tr><td>Exponential</td><td><span class="f">y = a·bˣ + q</span></td><td>Asymptote y = q. For a &gt; 0: b &gt; 1 increasing, 0 &lt; b &lt; 1 decreasing; for a &lt; 0 these directions reverse. Domain: all reals. Passes (0; a + q).</td></tr>
       <tr><td>Logarithm</td><td><span class="f">y = log<sub>b</sub>x</span></td><td>Inverse of y = bˣ. Asymptote x = 0. x-intercept (1; 0). Domain x &gt; 0. Passes (b; 1).</td></tr>
       <tr><td>Straight line</td><td><span class="f">y = mx + c</span></td><td>m = (y₂ − y₁)/(x₂ − x₁). Inverse of a line is a line.</td></tr>
     </table></div>
@@ -747,7 +747,7 @@ footer a{color:var(--fg)}
     <article class="type" id="fun-7">
       <header><span class="tag">TYPE 7</span><h3>Intersections and “for which x is f(x) &gt; g(x)”</h3><label class="got"><input type="checkbox" data-k="fun-7"> Got it</label></header>
       <p class="say">“Determine the coordinates of the points of intersection.” · “For which values of x is f(x) &gt; g(x)?” · “For which values of x is f(x)·g(x) &lt; 0?” · “For which x is f(x) ≤ 0?”</p>
-      <ol class="how"><li>Intersection: set f(x) = g(x), solve, then find y.</li><li>f(x) &gt; g(x): the x-values where the graph of f is <b>above</b> g. Read from the sketch between the intersection x-values.</li><li>Product &lt; 0: one graph above the x-axis, the other below.</li><li>Always give x-intervals, not y-values.</li></ol>
+      <ol class="how"><li>Intersection: set f(x) = g(x), solve, then find y.</li><li>f(x) &gt; g(x): the x-values where the graph of f is <b>above</b> g. Check the sketch: the solution may lie between or outside the intersection x-values.</li><li>Product &lt; 0: one graph above the x-axis, the other below.</li><li>Always give x-intervals, not y-values.</li></ol>
     </article>
 
     <article class="type" id="fun-8">
@@ -835,7 +835,7 @@ footer a{color:var(--fg)}
         <span class="ln">f(x) = 2x³ − 5x + 4x⁻² − x^(1/2)</span>
         <span class="ln">f′(x) = 6x² − 5 − 8x⁻³ − ½x^(−1/2)</span>
         <span class="ln">(2x − 1)² = 4x² − 4x + 1  →  8x − 4</span>
-        <span class="ln">y = (x − 3)(x + 3)/(x − 3) = x + 3  →  dy/dx = 1</span>
+        <span class="ln">y = (x − 3)(x + 3)/(x − 3) = x + 3 for x ≠ 3  →  dy/dx = 1 for x ≠ 3</span>
       </div></details>
     </article>
 
@@ -890,8 +890,8 @@ footer a{color:var(--fg)}
         <tr><td>Crosses the x-axis: + to −</td><td>Local maximum of f</td></tr>
         <tr><td>Crosses the x-axis: − to +</td><td>Local minimum of f</td></tr>
         <tr><td>f′ is itself decreasing (going down)</td><td>f″ &lt; 0: f concave down</td></tr>
-        <tr><td>Turning point of f′</td><td>Point of inflection of f</td></tr>
-        <tr><td>Touches the x-axis without crossing</td><td>Stationary point of inflection, not a max or min</td></tr>
+        <tr><td>Turning point of f′ where its slope changes sign</td><td>Point of inflection of f (if f″ changes sign)</td></tr>
+        <tr><td>Touches the x-axis without crossing and keeps the same sign</td><td>No local maximum or minimum of f; check concavity for a stationary point of inflection</td></tr>
       </table></div>
       <details class="ex" open><summary>Answers for the f′ with roots −1 and 3 (opens upward)</summary><div class="sol">
         <span class="ln">Increasing: x &lt; −1 or x &gt; 3.  Local max at x = −1, local min at x = 3.</span>
@@ -934,7 +934,7 @@ footer a{color:var(--fg)}
     <article class="type" id="cal-9">
       <header><span class="tag">TYPE 9</span><h3>Concavity and points of inflection (interpretation questions)</h3><label class="got"><input type="checkbox" data-k="cal-9"> Got it</label></header>
       <p class="say">“For which values of x is f concave up?” · “Where is the gradient of the tangent a minimum?” · “Show that f has no stationary points.”</p>
-      <ol class="how"><li>Concave up: f″(x) &gt; 0. Concave down: f″(x) &lt; 0.</li><li>The gradient of the tangent is smallest (or largest) at the inflection point, where f″ = 0.</li><li>No turning points: show f′(x) = 0 has Δ &lt; 0.</li></ol>
+      <ol class="how"><li>Concave up: f″(x) &gt; 0. Concave down: f″(x) &lt; 0.</li><li>At an inflection point, f″ changes sign (where it exists). The tangent gradient has a local maximum or minimum there when f′ changes from increasing to decreasing, or vice versa.</li><li>No turning points: show f′(x) = 0 has Δ &lt; 0.</li></ol>
       <details class="ex" open><summary>Example: f(x) = x³ + 3x + 1</summary><div class="sol">
         <span class="ln">f′(x) = 3x² + 3 = 0 → x² = −1: no real solution</span>
         <span class="ln">So there are no turning points (f′ is always positive: f always increasing).</span>
